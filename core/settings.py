@@ -116,11 +116,11 @@ DATABASES = {
     'default': {
         'ENGINE': 'django_tenants.postgresql_backend',
         # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'archivoplano',
-        'USER': 'SYSDBA',
-        'PASSWORD': 'D3s4rr0ll0',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': 'Ptq6T8UtPTZwIRXOFDt8',
+        'HOST': 'containers-us-west-16.railway.app',
+        'PORT': '7314',
     }
 }
 
