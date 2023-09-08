@@ -10,25 +10,24 @@ class CustomPersonaAdminForm(forms.ModelForm):
         fields = '__all__'
 
     def save(self, commit=True):
-        # Llama al método save del modelo base (Persona) para guardar "nombre" y "correo"
+    # Llama al método save del modelo base (Datos) para guardar los campos del modelo
         persona = super().save(commit=False)
 
-        # Ahora, procesa el archivo y guarda la información
+    # Ahora, procesa el archivo y guarda la información
         uploaded_file = self.cleaned_data.get('file')
         if uploaded_file:
             try:
                 df = pd.read_excel(uploaded_file)
                 for _, row in df.iterrows():
-                    persona = Datos(
-                        campo1=row['Nombre'],
-                        campo2=row['Correo'],
-                        # Agrega otros campos y asigna los valores desde el archivo
-                    )
+                # Asigna los valores desde el archivo a los campos del modelo ya creado (persona)
+                    persona.campo1 = row['Nombre']
+                    persona.campo2 = row['Correo']
+                # Agrega otros campos y asigna los valores desde el archivo
+                # persona.otro_campo = row['Otro Campo']
+                if commit:
                     persona.save()
                 print("¡Archivo de Excel procesado y datos guardados con éxito!")
             except Exception as e:
                 error_message = f"Error al procesar el archivo de Excel: {str(e)}"
-            if commit:
-                persona.save()
-        
+
         return persona
