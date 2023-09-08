@@ -1,0 +1,12 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+<div class="container">
+  <h2>Cargar Archivo Excel</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Subir archivo</button>
+  </form>
+</div>
+{% endblock %}
