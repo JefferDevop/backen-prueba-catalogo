@@ -10,3 +10,4 @@ def subir_excel(request):
     else:
         form = CustomPersonaAdminForm(request=request)  # Asegúrate de pasar 'request'
     return render(request, 'subir_excel.html', {'form': form})
+
