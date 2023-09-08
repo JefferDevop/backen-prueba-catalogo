@@ -48,7 +48,7 @@ urlpatterns = [
          cache_timeout=0), name='schema-swagger-ui'),
     path('redocs/', schema_view.with_ui('redoc',
          cache_timeout=0), name='schema-redoc'),
-    path('admin-dashboard/file/datos/cargar_archivo/', views.cargar_archivo, name='cargar_archivo'),
+    path('admin-dashboard/file/datos/cargar_archivo/', views.DatosAdmin, name='cargar_archivo'),
 
 
     path('api/', include('accounts.api.router')),
