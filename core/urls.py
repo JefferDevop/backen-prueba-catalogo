@@ -42,7 +42,7 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-     path('admin-dashboard/file/datos/cargar_archivo/', views.cargar_archivo, name='cargar_archivo'),
+    path('admin-dashboard/file/datos/cargar_archivo/', views.cargar_archivo, name='cargar_archivo'),
     path('admin-dashboard/', admin.site.urls),
     path('docs/', schema_view.with_ui('swagger',
          cache_timeout=0), name='schema-swagger-ui'),
