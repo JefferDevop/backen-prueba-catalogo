@@ -1,6 +1,8 @@
 from django.contrib import admin
 from .models import Datos
+from .form import CustomPersonaAdminForm
 
-@admin.register(Datos)
 class PersonaAdmin(admin.ModelAdmin):
-    list_display = ('campo1', 'campo2')
+    form = CustomPersonaAdminForm
+
+admin.site.register(Datos, PersonaAdmin)
