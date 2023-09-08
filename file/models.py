@@ -8,5 +8,5 @@ class Datos(models.Model):
     archivo_excel = models.FileField(upload_to='archivos_excel/', null=True, blank=True)
 
     def __str__(self):
-        return self.campo1
+        return self.campo1 or 'Persona sin nombre'
 
