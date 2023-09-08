@@ -25,11 +25,12 @@ class CustomPersonaAdminForm(forms.ModelForm):
                 try:
                     df = pd.read_excel(uploaded_file)
                     for _, row in df.iterrows():
-                        persona = Datos(
-                            campo1=row['Nombre'],
-                            campo2=row['Correo'],
-                            # Agrega otros campos y asigna los valores desde el archivo
-                        )
+                        # Asigna los valores desde el archivo a los campos del modelo ya creado (persona)
+                        persona.campo1 = row['Nombre']
+                        persona.campo2 = row['Correo']
+                        # Agrega otros campos y asigna los valores desde el archivo
+                        # persona.otro_campo = row['Otro Campo']
+                    if commit:
                         persona.save()
                     messages.success(self.request, "¡Archivo de Excel procesado y datos guardados con éxito!")
                     return redirect('exito')  # Redirige a una página de éxito
