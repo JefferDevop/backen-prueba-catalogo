@@ -41,13 +41,13 @@ schema_view = get_schema_view(
     public=True,
 )
 
-urlpatterns = [
-    path('admin-dashboard/file/datos/cargar_archivo/', views.cargar_archivo, name='cargar_archivo'),
+urlpatterns = [    
     path('admin-dashboard/', admin.site.urls),
     path('docs/', schema_view.with_ui('swagger',
          cache_timeout=0), name='schema-swagger-ui'),
     path('redocs/', schema_view.with_ui('redoc',
          cache_timeout=0), name='schema-redoc'),
+    path('admin-dashboard/file/cargar_archivo/', views.cargar_archivo, name='cargar_archivo'),
 
 
     path('api/', include('accounts.api.router')),
