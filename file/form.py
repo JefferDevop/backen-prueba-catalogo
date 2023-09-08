@@ -25,7 +25,7 @@ class CustomPersonaAdminForm(forms.ModelForm):
                         # Agrega otros campos y asigna los valores desde el archivo
                     )
                     persona.save()
-                return redirect('exito')  # Redirige a una página de éxito
+                print("¡Archivo de Excel procesado y datos guardados con éxito!")
             except Exception as e:
                 error_message = f"Error al procesar el archivo de Excel: {str(e)}"
             if commit:
