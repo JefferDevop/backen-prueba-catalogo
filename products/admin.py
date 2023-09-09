@@ -78,6 +78,21 @@ class CategoryAdmin(admin.ModelAdmin):
         return new_urls + urls
     
     def upload_csv(self, request):
+
+        if request.method == "POST":
+            csv_file = request.FILES["csv_upload"]
+            file_data = csv_file.read().decode("utf-8")
+            csv_data = file_data.split("\n")
+
+            for x in csv_data:
+                fields = x.split(",")
+                created = Category.objects.update_or_create(
+                    name = fields[0],
+                    slug = fields[1],
+                    image = fields[2],
+                )
+
+
         form = CsvImportForm()
         data = {"form":form}
         return render(request, "admin/csv_category.html", data)
