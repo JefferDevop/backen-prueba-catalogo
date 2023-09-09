@@ -1,7 +1,8 @@
 from django.contrib import admin
+from django.urls.resolvers import URLPattern
+from django.shortcuts import render
+from django.urls import path
 from .models import Product, Category, CategoryProduct, Attribut, Gallery
-
-
 # ------------------------------------------
 
 #admin.site.index_title = 'Panel Administrativo'
@@ -59,6 +60,14 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug', 'modified_date', 'created_date')
     readonly_fields = ('created_date',)
     search_fields = ('name',)
+
+    def get_urls(self):
+        urls = super().get_urls()
+        new_urls = [path('upload-csv/', self.upload_csv),]
+        return new_urls + urls
+    
+    def upload_csv(self, request):
+        return render(request, "admin/csv_upload.html")
 
 
 class CategoryProductAdmin(admin.ModelAdmin):
