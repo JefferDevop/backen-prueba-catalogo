@@ -85,11 +85,11 @@ class CategoryAdmin(admin.ModelAdmin):
             csv_data = file_data.split("\n")
 
             for x in csv_data:
-                fields = x.split(",")
+                fields = x.split(";")
                 created = Category.objects.update_or_create(
-                    name = fields[1],
-                    slug = fields[2],
-                    image = fields[3],
+                    name = fields[0],
+                    slug = fields[1],
+                    image = fields[2],
                 )
 
 
