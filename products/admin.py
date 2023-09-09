@@ -89,7 +89,7 @@ class CategoryAdmin(admin.ModelAdmin):
                 created = Category.objects.update_or_create(
                     name = fields[1],
                     slug = fields[2],
-                    image = fields[3],
+                    image_alterna = fields[3],
                 )
 
 
