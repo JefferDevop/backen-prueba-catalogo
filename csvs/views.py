@@ -22,8 +22,7 @@ def upload_file_view(request):
                     row = "".join(row)     
                     row = row.replace(";", " ")    
                     row = row.split()            
-                    product = row[1].upper()
-                    
+                                      
             obj.activated = True
             obj.save()
     return render(request, "csvs/upload.html", {"form": form})
