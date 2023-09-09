@@ -26,6 +26,7 @@ def upload_file_view(request):
                     Sale.objects.create(
                         product = product,
                         quantity = int(row[2]),
+                        total = int(row[3]),
                     )
             obj.activated = True
             obj.save()
