@@ -54,6 +54,14 @@ class ProductAdmin(admin.ModelAdmin):
     ordering = ('name_extend',)
     inlines = [CategoryProductInline]
 
+    def get_urls(self):
+        urls = super().get_urls()
+        new_urls = [path('upload-csv/', self.upload_csv),]
+        return new_urls + urls
+    
+    def upload_csv(self, request):
+        return render(request, "admin/csv_product.html")
+
 
 class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
@@ -67,7 +75,7 @@ class CategoryAdmin(admin.ModelAdmin):
         return new_urls + urls
     
     def upload_csv(self, request):
-        return render(request, "admin/csv_upload.html")
+        return render(request, "admin/csv_category.html")
 
 
 class CategoryProductAdmin(admin.ModelAdmin):
