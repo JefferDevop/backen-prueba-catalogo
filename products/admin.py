@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls.resolvers import URLPattern
 from django.shortcuts import render
 from django.urls import path
+from django import forms
 from .models import Product, Category, CategoryProduct, Attribut, Gallery
 # ------------------------------------------
 
@@ -45,6 +46,8 @@ class AttributAdmin(admin.ModelAdmin):
 #     ordering = ('name_extend',)
 #     inlines = [GalleryInline, CategoryProductInline]
 
+class CsvImportForm(forms.Form):
+    csv_upload = forms.FileField()
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('active', 'name_extend', 'ref', 'codigo',  'price1', 'price2', 'flag', 'modified_date')
@@ -75,7 +78,9 @@ class CategoryAdmin(admin.ModelAdmin):
         return new_urls + urls
     
     def upload_csv(self, request):
-        return render(request, "admin/csv_category.html")
+        form = CsvImportForm()
+        data = {"form":form}
+        return render(request, "admin/csv_category.html", data)
 
 
 class CategoryProductAdmin(admin.ModelAdmin):
