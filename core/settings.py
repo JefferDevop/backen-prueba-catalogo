@@ -45,7 +45,9 @@ TENANT_APPS = (
     'warehome',
     'stores',
     'company',
-    'file',
+    'csvs',
+    'sales',
+  
 )
 
 INSTALLED_APPS = list(SHARED_APPS) + \
@@ -91,7 +93,7 @@ DATABASE_ROUTERS = (
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

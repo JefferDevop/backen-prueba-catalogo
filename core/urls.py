@@ -1,7 +1,8 @@
 
 from django.contrib import admin
 from django.urls import path, include
-from file import views
+# from file import views
+
 
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
@@ -48,7 +49,7 @@ urlpatterns = [
          cache_timeout=0), name='schema-swagger-ui'),
     path('redocs/', schema_view.with_ui('redoc',
          cache_timeout=0), name='schema-redoc'),
-    path('subir_excel/', views.subir_excel, name='subir_excel'),
+    path('', include('csvs.urls', namespace='csvs')),
     # path('admin-dashboard/file/datos/cargar_archivo/', views.DatosAdmin, name='cargar_archivo'),
 
 
