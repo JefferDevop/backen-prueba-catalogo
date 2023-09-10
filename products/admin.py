@@ -118,8 +118,7 @@ class CategoryAdmin(admin.ModelAdmin):
                                 name=row[1],
                                 defaults={
                                     "slug": row[2],
-                                    "image_alterna": row[3],
-                                    "image": row[4],
+                                    "image_alterna": row[3],                               
                                 },
                             )
 
