@@ -96,25 +96,32 @@ class CategoryAdmin(admin.ModelAdmin):
 
     def upload_csv(self, request):
         if request.method == "POST":
-            csv_file = request.FILES["csv_upload"]
-            file_data = csv_file.read().decode("utf-8")
-            csv_data = file_data.split("\n")
+            csv_file = request.FILES.get(
+                "csv_upload"
+            )  # Use get() to safely get the file
 
-            for i, row in enumerate(csv_data):
-                if i == 0:
-                    pass
-                else:
-                    row = "".join(row)
-                    row = row.replace(";", " ")
-                    row = row.split()
-                    product = row[1].upper()
+            if csv_file:
+                file_data = csv_file.read().decode("utf-8")
+                csv_data = file_data.split("\n")
 
-                    created = Category.objects.update_or_create(
-                        name=(row[1]),
-                        slug=(row[2]),
-                        image_alterna=(row[3]),
-                        image=(row[4]),
-                    )
+                for i, row in enumerate(csv_data):
+                    if i == 0:
+                        continue  # Skip the header row
+                    else:
+                        row = row.strip()  # Remove leading/trailing whitespaces
+                        row = row.replace(";", " ")  # Replace semicolons with spaces
+                        row = row.split()
+
+                        # Check if row has enough elements to avoid "list index out of range"
+                        if len(row) >= 4:
+                            category, created = Category.objects.update_or_create(
+                                name=row[1],
+                                defaults={
+                                    "slug": row[2],
+                                    "image_alterna": row[3],
+                                    "image": row[4],
+                                },
+                            )
 
         form = CsvImportForm()
         data = {"form": form}
