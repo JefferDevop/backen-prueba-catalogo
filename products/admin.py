@@ -133,6 +133,7 @@ class CategoryAdmin(admin.ModelAdmin):
                                     category.save()
                                 else:
                                     # Si la categoría existe, actualiza sus atributos
+                                    category.name=row[1],
                                     category.slug = row[2]
                                     category.image_alterna = row[3]                                    
                                     category.save()
