@@ -1,7 +1,7 @@
 
 from django.contrib import admin
 from django.urls import path, include
-from ..products import views
+# from ..products import views
 # from file import views
 
 
@@ -51,7 +51,7 @@ urlpatterns = [
     path('redocs/', schema_view.with_ui('redoc',
          cache_timeout=0), name='schema-redoc'),
     path('', include('csvs.urls', namespace='csvs')),
-    path('admin-dashboard/products/category/upload-csv/', views.upload_file_view, name='upload_csv'),
+    # path('admin-dashboard/products/category/upload-csv/', views.upload_file_view, name='upload_csv'),
     # path('admin-dashboard/file/datos/cargar_archivo/', views.DatosAdmin, name='cargar_archivo'),
 
 
