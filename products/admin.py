@@ -125,7 +125,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
         form = CsvImportForm()
         data = {"form": form}
-        return render(request, "admin/")
+        return render(request, "admin/csv_category.html", data)
 
 
 class CategoryProductAdmin(admin.ModelAdmin):
