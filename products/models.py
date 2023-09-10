@@ -20,7 +20,7 @@ class Product(models.Model):
     name_extend = models.CharField(
         max_length=200, unique=True, verbose_name=("Nombre Producto")
     )
-
+    image_alterna = models.CharField(max_length=600, null=True, blank=True)
     images = CloudinaryField(
         "categories/",
         blank=True,
