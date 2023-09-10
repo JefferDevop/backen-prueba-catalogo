@@ -26,6 +26,7 @@ class ProductSerializer(ModelSerializer):
             "slug",
             "description",          
             "images",
+            "image_alterna",
             "price_old",
             "price1",
             "price2",
