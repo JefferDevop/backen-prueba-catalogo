@@ -100,14 +100,21 @@ class CategoryAdmin(admin.ModelAdmin):
             file_data = csv_file.read().decode("utf-8")
             csv_data = file_data.split("\n")
 
-            for x in csv_data:
-                fields = x.split(";")
-                created = Category.objects.update_or_create(
-                    name=fields[1],
-                    slug=fields[2],
-                    image_alterna=fields[3],
-                    image=fields[4]
-                )
+            for i, row in enumerate(csv_data):
+                if i == 0:
+                    pass
+                else:
+                    row = "".join(row)
+                    row = row.replace(";", " ")
+                    row = row.split()
+                    product = row[1].upper()
+
+                    created = Category.objects.update_or_create(
+                        name=(row[1]),
+                        slug=(row[2]),
+                        image_alterna=(row[3]),
+                        image=(row[4]),
+                    )
 
         form = CsvImportForm()
         data = {"form": form}
