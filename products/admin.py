@@ -3,7 +3,9 @@ from django.urls.resolvers import URLPattern
 from django.shortcuts import render
 from django.urls import path
 from django import forms
+from django.core.exceptions import ObjectDoesNotExist
 from .models import Product, Category, CategoryProduct, Attribut, Gallery
+
 
 # ------------------------------------------
 
@@ -96,31 +98,47 @@ class CategoryAdmin(admin.ModelAdmin):
 
     def upload_csv(self, request):
         if request.method == "POST":
-            csv_file = request.FILES.get(
-                "csv_upload"
-            )  # Use get() to safely get the file
+            csv_file = request.FILES.get("csv_upload")
 
             if csv_file:
-                file_data = csv_file.read().decode("utf-8")
-                csv_data = file_data.split("\n")
+                try:
+                    file_data = csv_file.read().decode("utf-8")
+                    csv_data = file_data.split("\n")
 
-                for i, row in enumerate(csv_data):
-                    if i == 0:
-                        continue  # Skip the header row
-                    else:
-                        row = row.strip()  # Remove leading/trailing whitespaces
-                        row = row.replace(";", " ")  # Replace semicolons with spaces
-                        row = row.split()
+                    for i, row in enumerate(csv_data):
+                        if i == 0:
+                            continue  # Skip the header row
+                        else:
+                            row = row.strip()  # Remove leading/trailing whitespaces
+                            row = row.replace(
+                                ";", " "
+                            )  # Replace semicolons with spaces
+                            row = row.split()
 
-                        # Check if row has enough elements to avoid "list index out of range"
-                        if len(row) >= 5:
-                            category, created = Category.objects.update_or_create(
-                                name=row[1],
-                                defaults={
-                                    "slug": row[2],
-                                    "image_alterna": row[3],                               
-                                },
-                            )
+                            if len(row) >= 5:                            
+
+                                try:
+                                    # Intenta obtener la categoría existente por nombre
+                                    category = Category.objects.get(name=row[1])
+                                except ObjectDoesNotExist:
+                                    category = None
+
+                                # Si la categoría no existe, crea una nueva
+                                if category is None:
+                                    category = Category(
+                                        name=row[1],
+                                        slug=row[2],
+                                        image_alterna=row[3],                                       
+                                    )
+                                    category.save()
+                                else:
+                                    # Si la categoría existe, actualiza sus atributos
+                                    category.slug = row[2]
+                                    category.image_alterna = row[3]                                    
+                                    category.save()
+                except Exception as e:
+                    # Manejar errores generales aquí, por ejemplo, registrarlos o mostrar un mensaje de error
+                    print(f"Error al procesar el archivo CSV: {str(e)}")
 
         form = CsvImportForm()
         data = {"form": form}
