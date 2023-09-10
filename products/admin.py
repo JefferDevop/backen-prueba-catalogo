@@ -167,7 +167,7 @@ class ProductAdmin(admin.ModelAdmin):
 
 class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
-    list_display = ("name", "slug", "modified_date", "created_date")
+    list_display = ("codigo", "name", "created_date")
     readonly_fields = ("created_date",)
     search_fields = ("name",)
 
