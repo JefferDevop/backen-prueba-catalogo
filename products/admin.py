@@ -97,7 +97,7 @@ class ProductAdmin(admin.ModelAdmin):
                             # row = row.replace(
                             #     ";", " "
                             # )  # Replace semicolons with spaces
-                            # row = row.split()
+                            row = row.split(';')
 
                             if len(row) >= 5:
                                 try:
@@ -178,7 +178,7 @@ class CategoryAdmin(admin.ModelAdmin):
                             # row = row.replace(
                             #     ";", " "
                             # )  # Replace semicolons with spaces
-                            # row = row.split()
+                            row = row.split(';')
 
                             if len(row) >= 5:
                                 try:
