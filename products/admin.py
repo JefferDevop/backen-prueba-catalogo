@@ -113,7 +113,7 @@ class CategoryAdmin(admin.ModelAdmin):
                         row = row.split()
 
                         # Check if row has enough elements to avoid "list index out of range"
-                        if len(row) >= 4:
+                        if len(row) >= 5:
                             category, created = Category.objects.update_or_create(
                                 name=row[1],
                                 defaults={
@@ -125,7 +125,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
         form = CsvImportForm()
         data = {"form": form}
-        return render(request, "admin/csv_category.html", data)
+        return render(request, "admin/")
 
 
 class CategoryProductAdmin(admin.ModelAdmin):
