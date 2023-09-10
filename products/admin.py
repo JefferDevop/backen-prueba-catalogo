@@ -103,10 +103,10 @@ class CategoryAdmin(admin.ModelAdmin):
             for x in csv_data:
                 fields = x.split(";")
                 created = Category.objects.update_or_create(
-                    name=fields['Nombre'],
-                    slug=fields['Slug'],
-                    image_alterna=fields['alterna'],
-                    image=fields['imagen'],
+                    name=fields[1],
+                    slug=fields[2],
+                    image_alterna=fields[3],
+                    image=fields[4]
                 )
 
         form = CsvImportForm()
