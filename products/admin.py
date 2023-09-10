@@ -94,17 +94,32 @@ class ProductAdmin(admin.ModelAdmin):
                             continue  # Skip the header row
                         else:
                             row = row.strip()  # Remove leading/trailing whitespaces
+                            row = row.split(';')
                             # row = row.replace(
                             #     ";", " "
                             # )  # Replace semicolons with spaces
-                            row = row.split(';')
 
                             if len(row) >= 5:
+                                category_id = row[14]
+
+                                try:
+                                    # Intenta obtener la categoría existente por código
+                                    category = Category.objects.get(codigo=category_id)
+                                except Category.DoesNotExist:
+                                    # Si la categoría no existe, crea una nueva
+                                    category = Category(
+                                        codigo=category_id,
+                                        name=category_id,
+                                        slug=category_id,
+                                        image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4gk1589Gg7NsjcTVBb-jFRPxRoEOKwY3pUQ&usqp=CAU"
+                                    )
+                                category.save()
+                            
                                 try:
                                     # Intenta obtener el producto existente por codigo
                                     product = Product.objects.get(codigo=row[0])
                                 except ObjectDoesNotExist:
-                                    product = None
+                                    product = None                                    
 
                                 # Si el producto no existe, crea uno nuevo
                                 if product is None:
@@ -177,10 +192,10 @@ class CategoryAdmin(admin.ModelAdmin):
                             continue  # Skip the header row
                         else:
                             row = row.strip()  # Remove leading/trailing whitespaces
+                            row = row.split(';')
                             # row = row.replace(
                             #     ";", " "
                             # )  # Replace semicolons with spaces
-                            row = row.split(';')
 
                             if len(row) >= 5:
                                 try:
