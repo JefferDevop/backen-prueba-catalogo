@@ -81,7 +81,71 @@ class ProductAdmin(admin.ModelAdmin):
         return new_urls + urls
 
     def upload_csv(self, request):
-        return render(request, "admin/csv_product.html")
+        if request.method == "POST":
+            csv_file = request.FILES.get("csv_upload")
+
+            if csv_file:
+                try:
+                    file_data = csv_file.read().decode("utf-8")
+                    csv_data = file_data.split("\n")
+
+                    for i, row in enumerate(csv_data):
+                        if i == 0:
+                            continue  # Skip the header row
+                        else:
+                            row = row.strip()  # Remove leading/trailing whitespaces
+                            row = row.replace(
+                                ";", " "
+                            )  # Replace semicolons with spaces
+                            row = row.split()
+
+                            if len(row) >= 5:
+                                try:
+                                    # Intenta obtener el producto existente por codigo
+                                    product = Product.objects.get(codigo=row[0])
+                                except ObjectDoesNotExist:
+                                    product = None
+
+                                # Si el producto no existe, crea uno nuevo
+                                if product is None:
+                                    product = Product(
+                                        codigo=row[0],
+                                        name_extend=row[1],
+                                        description=row[2],
+                                        price1=row[3],
+                                        price2=row[4],
+                                        price_old=row[5],
+                                        flag=row[6],
+                                        ref=row[7],
+                                        slug = row[8],
+                                        active = row[9],
+                                        soldout = row[10],
+                                        offer = row[11],
+                                        home = row[12],
+                                    )
+                                    product.save()
+                                else:
+                                    # Si el producto existe, actualiza sus atributos
+                                    product.name_extend=row[1],
+                                    product.description=row[2],
+                                    product.price1=row[3],
+                                    product.price2=row[4],
+                                    product.price_old=row[5],
+                                    product.flag=row[6],
+                                    product.ref=row[7],
+                                    product.slug = row[8],
+                                    product.active = row[9],
+                                    product.soldout = row[10],
+                                    product.offer = row[11],
+                                    product.home = row[12],
+                                    product.save()
+                except Exception as e:
+                    # Manejar errores generales aquí, por ejemplo, registrarlos o mostrar un mensaje de error
+                    print(f"Error al procesar el archivo CSV: {str(e)}")
+
+        form = CsvImportForm()
+        data = {"form": form}  
+        return render(request, "admin/csv_product.html", data)
 
 
 class CategoryAdmin(admin.ModelAdmin):
