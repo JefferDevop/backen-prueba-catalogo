@@ -20,9 +20,8 @@ class Product(models.Model):
     name_extend = models.CharField(
         max_length=200, unique=True, verbose_name=("Nombre Producto")
     )
-    image_alterna = models.CharField(max_length=600, null=True, blank=True)
     images = CloudinaryField(
-        "categories/",
+        "Imagen",
         blank=True,
         transformation=[
             {"width": 800, "height": 1200, "crop": "limit"},
@@ -30,6 +29,7 @@ class Product(models.Model):
         ],
         format="webp",
     )
+    image_alterna = models.CharField(max_length=600, null=True, blank=True, verbose_name=("Imagen Alterna"))
     description = models.TextField(
         max_length=4000, blank=True, verbose_name=("Descripción el producto")
     )
