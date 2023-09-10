@@ -124,6 +124,7 @@ class ProductAdmin(admin.ModelAdmin):
                                         home = row[12],                                        
                                     )
                                     product.save()
+                                    print(f"Se Creo correctamente")
                                 else:
                                     # Si el producto existe, actualiza sus atributos
                                     product.name_extend=row[1],
@@ -139,6 +140,7 @@ class ProductAdmin(admin.ModelAdmin):
                                     product.offer = row[11],
                                     product.home = row[12],                                   
                                     product.save()
+                                    print(f"Se Actualizó correctamente")
                 except Exception as e:
                     # Manejar errores generales aquí, por ejemplo, registrarlos o mostrar un mensaje de error
                     print(f"Error al procesar el archivo CSV: {str(e)}")
