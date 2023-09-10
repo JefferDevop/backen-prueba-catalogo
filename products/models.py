@@ -69,6 +69,7 @@ class Product(models.Model):
 
 
 class Category(models.Model):
+    codigo = models.CharField(max_length=10, unique=True, verbose_name=("Código"))
     name = models.CharField(max_length=50, unique=True, verbose_name=("Nombre"))
     slug = models.SlugField(max_length=100, unique=True, verbose_name=("Url"))
     image_alterna = models.CharField(max_length=600, null=True, blank=True)

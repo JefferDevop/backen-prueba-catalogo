@@ -115,27 +115,27 @@ class CategoryAdmin(admin.ModelAdmin):
                             )  # Replace semicolons with spaces
                             row = row.split()
 
-                            if len(row) >= 5:                            
-
+                            if len(row) >= 5:
                                 try:
                                     # Intenta obtener la categoría existente por nombre
-                                    category = Category.objects.get(name=row[1])
+                                    category = Category.objects.get(codigo=row[1])
                                 except ObjectDoesNotExist:
                                     category = None
 
                                 # Si la categoría no existe, crea una nueva
                                 if category is None:
                                     category = Category(
-                                        name=row[1],
-                                        slug=row[2],
-                                        image_alterna=row[3],                                       
+                                        codigo=row[1],
+                                        name=row[2],
+                                        slug=row[3],
+                                        image_alterna=row[4],
                                     )
                                     category.save()
                                 else:
                                     # Si la categoría existe, actualiza sus atributos
-                                    category.name=row[1],
-                                    category.slug = row[2]
-                                    category.image_alterna = row[3]                                    
+                                    category.name = row[2]
+                                    category.slug = row[3]
+                                    category.image_alterna = row[4]
                                     category.save()
                 except Exception as e:
                     # Manejar errores generales aquí, por ejemplo, registrarlos o mostrar un mensaje de error
