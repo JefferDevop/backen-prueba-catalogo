@@ -4,7 +4,9 @@ from django.shortcuts import render
 from django.urls import path
 from django import forms
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.decorators import login_required
 from .models import Product, Category, CategoryProduct, Attribut, Gallery
+
 
 
 # ------------------------------------------
@@ -89,6 +91,7 @@ class CategoryAdmin(admin.ModelAdmin):
     readonly_fields = ("created_date",)
     search_fields = ("name",)
 
+    @login_required
     def get_urls(self):
         urls = super().get_urls()
         new_urls = [
