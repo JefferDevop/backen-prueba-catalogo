@@ -15,7 +15,7 @@ from django.shortcuts import render
 
 class Product(models.Model):
     codigo = models.BigAutoField(
-        primary_key=True, auto_created=True, verbose_name=("Código")
+        primary_key=True, verbose_name=("Código")
     )
     name_extend = models.CharField(
         max_length=200, unique=True, verbose_name=("Nombre Producto")
@@ -45,13 +45,10 @@ class Product(models.Model):
     flag = models.CharField(
         max_length=200, blank=True, null=True, verbose_name=("Grupo")
     )
-
     ref = models.CharField(
         max_length=200, blank=True, null=True, verbose_name=("Referencia")
     )
-
     slug = models.SlugField(max_length=200, unique=True, verbose_name=("Url"))
-
     active = models.BooleanField(default=True, verbose_name=("Activo"))
     soldout = models.BooleanField(default=False, verbose_name=("Agotado"))
     offer = models.BooleanField(default=False, verbose_name=("Oferta"))
@@ -82,7 +79,6 @@ class Category(models.Model):
         ],
         format="webp",
     )
-
     created_date = models.DateTimeField(auto_now_add=True, verbose_name=("Creado"))
     modified_date = models.DateTimeField(auto_now=True, verbose_name=("Modificado"))
     # history = HistoricalRecords()
@@ -96,7 +92,6 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
-
 
 class CategoryProduct(models.Model):
     product = models.ForeignKey(
@@ -115,7 +110,6 @@ class CategoryProduct(models.Model):
     def __str__(self):
         return str(self.category)
 
-
 class Gallery(models.Model):
     product = models.ForeignKey(
         Product, default=None, on_delete=models.CASCADE, verbose_name=("Producto")
@@ -128,7 +122,6 @@ class Gallery(models.Model):
     class Meta:
         verbose_name = "Imagen"
         verbose_name_plural = "Galeria de Imagenes"
-
 
 class Attribut(models.Model):
     name = models.CharField(max_length=50, unique=True, verbose_name=("Nombre"))

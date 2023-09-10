@@ -58,10 +58,10 @@ class CsvImportForm(forms.Form):
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = (
-        "active",
-        "name_extend",
-        "ref",
+        "active", 
         "codigo",
+        "name_extend",               
+        "ref",      
         "price1",
         "price2",
         "flag",
