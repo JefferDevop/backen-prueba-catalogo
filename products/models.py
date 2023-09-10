@@ -29,7 +29,7 @@ class Product(models.Model):
         ],
         format="webp",
     )
-    image_alterna = models.CharField(max_length=600, null=True, blank=True, verbose_name=("Imagen Alterna"))
+  
     description = models.TextField(
         max_length=4000, blank=True, verbose_name=("Descripción el producto")
     )
