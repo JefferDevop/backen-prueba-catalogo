@@ -155,7 +155,14 @@ class ProductAdmin(admin.ModelAdmin):
                                     product.offer = row[11]
                                     product.home = row[12]  
                                     product.image_alterna = row[13]                                 
-                                    product.save()                                   
+                                    product.save()  
+
+                                    # Crea una instancia de CategoryProduct
+                                    category_product = CategoryProduct(
+                                        product_id=row[0],
+                                        category_id=row[14]
+                                    )
+                                    category_product.save()                                 
                 except Exception as e:
                     # Manejar errores generales aquí, por ejemplo, registrarlos o mostrar un mensaje de error
                     print(f"Error al procesar el archivo CSV: {str(e)}")
