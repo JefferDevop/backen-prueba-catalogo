@@ -122,7 +122,7 @@ class ProductAdmin(admin.ModelAdmin):
                                         soldout = row[10],
                                         offer = row[11],
                                         home = row[12],
-                                       
+                                        image_alterna = row[13],
                                     )
                                     product.save()
                                 else:
@@ -139,7 +139,7 @@ class ProductAdmin(admin.ModelAdmin):
                                     product.soldout = row[10],
                                     product.offer = row[11],
                                     product.home = row[12],
-                                  
+                                    product.image_alterna = row[13],
                                     product.save()
                 except Exception as e:
                     # Manejar errores generales aquí, por ejemplo, registrarlos o mostrar un mensaje de error
