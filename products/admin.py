@@ -94,10 +94,10 @@ class ProductAdmin(admin.ModelAdmin):
                             continue  # Skip the header row
                         else:
                             row = row.strip()  # Remove leading/trailing whitespaces
-                            row = row.replace(
-                                ";", " "
-                            )  # Replace semicolons with spaces
-                            row = row.split()
+                            # row = row.replace(
+                            #     ";", " "
+                            # )  # Replace semicolons with spaces
+                            # row = row.split()
 
                             if len(row) >= 5:
                                 try:
@@ -117,7 +117,7 @@ class ProductAdmin(admin.ModelAdmin):
                                         price_old=row[5],
                                         flag=row[6],
                                         ref=row[7],
-                                        slug = row[8],
+                                        slug = row[8].replace(" ", "-"),
                                         active = row[9],
                                         soldout = row[10],
                                         offer = row[11],
@@ -133,7 +133,7 @@ class ProductAdmin(admin.ModelAdmin):
                                     product.price_old=row[5],
                                     product.flag=row[6],
                                     product.ref=row[7],
-                                    product.slug = row[8],
+                                    product.slug = row[8].replace(" ", "-"),
                                     product.active = row[9],
                                     product.soldout = row[10],
                                     product.offer = row[11],
@@ -175,10 +175,10 @@ class CategoryAdmin(admin.ModelAdmin):
                             continue  # Skip the header row
                         else:
                             row = row.strip()  # Remove leading/trailing whitespaces
-                            row = row.replace(
-                                ";", " "
-                            )  # Replace semicolons with spaces
-                            row = row.split()
+                            # row = row.replace(
+                            #     ";", " "
+                            # )  # Replace semicolons with spaces
+                            # row = row.split()
 
                             if len(row) >= 5:
                                 try:
@@ -192,14 +192,14 @@ class CategoryAdmin(admin.ModelAdmin):
                                     category = Category(
                                         codigo=row[0],
                                         name=row[1],
-                                        slug=row[2],
+                                        slug=row[2].replace(" ", "-"),
                                         image_alterna=row[3],
                                     )
                                     category.save()
                                 else:
                                     # Si la categoría existe, actualiza sus atributos
                                     category.name = row[1]
-                                    category.slug = row[2]
+                                    category.slug = row[2].replace(" ", "-")
                                     category.image_alterna = row[3]
                                     category.save()
                 except Exception as e:
