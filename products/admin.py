@@ -123,24 +123,22 @@ class ProductAdmin(admin.ModelAdmin):
                                         offer = row[11],
                                         home = row[12],                                        
                                     )
-                                    product.save()
-                                    print(f"Se Creo correctamente")
+                                    product.save()                                  
                                 else:
                                     # Si el producto existe, actualiza sus atributos
-                                    product.name_extend=row[1],
-                                    product.description=row[2],
-                                    product.price1=row[3],
-                                    product.price2=row[4],
-                                    product.price_old=row[5],
-                                    product.flag=row[6],
-                                    product.ref=row[7],
-                                    product.slug = row[8].replace(" ", "-"),
-                                    product.active = row[9],
-                                    product.soldout = row[10],
-                                    product.offer = row[11],
-                                    product.home = row[12],                                   
-                                    product.save()
-                                    print(f"Se Actualizó correctamente")
+                                    product.name_extend=row[1]
+                                    product.description=row[2]
+                                    product.price1=row[3]
+                                    product.price2=row[4]
+                                    product.price_old=row[5]
+                                    product.flag=row[6]
+                                    product.ref=row[7]
+                                    product.slug = row[8].replace(" ", "-")
+                                    product.active = row[9]
+                                    product.soldout = row[10]
+                                    product.offer = row[11]
+                                    product.home = row[12]                                  
+                                    product.save()                                   
                 except Exception as e:
                     # Manejar errores generales aquí, por ejemplo, registrarlos o mostrar un mensaje de error
                     print(f"Error al procesar el archivo CSV: {str(e)}")
