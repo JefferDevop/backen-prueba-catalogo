@@ -118,55 +118,55 @@ class ProductAdmin(admin.ModelAdmin):
 
                                 try:
                                     # Intenta obtener el producto existente por codigo
-                                    product = Product.objects.get(codigo=row[0])
+                                    product = Product.objects.get(codigo=str(row[0]))
                                 except ObjectDoesNotExist:
                                     product = None
 
                                 # Si el producto no existe, crea uno nuevo
                                 if product is None:
                                     product = Product(
-                                        codigo=row[0],
-                                        name_extend=row[1],
-                                        description=row[2],
-                                        price1=row[3],
-                                        price2=row[4],
-                                        price_old=row[5],
-                                        flag=row[6],
-                                        ref=row[7],
-                                        slug=row[8].replace(" ", "-"),
-                                        active=row[9],
-                                        soldout=row[10],
-                                        offer=row[11],
-                                        home=row[12],
-                                        image_alterna=row[13],
+                                        codigo=str(row[0]),
+                                        name_extend=str(row[1]),
+                                        description=str(row[2]),
+                                        price1=int(row[3]),
+                                        price2=int(row[4]),
+                                        price_old=int(row[5]),
+                                        flag=str(row[6]),
+                                        ref=str(row[7]),
+                                        slug=str(row[8]).replace(" ", "-"),
+                                        active=str(row[9]),
+                                        soldout=str(row[10]),
+                                        offer=str(row[11]),
+                                        home=str(row[12]),
+                                        image_alterna=str(row[13]),
                                     )
                                     product.save()
                                 else:
                                     # Si el producto existe, actualiza sus atributos
-                                    product.name_extend = row[1]
-                                    product.description = row[2]
-                                    product.price1 = row[3]
-                                    product.price2 = row[4]
-                                    product.price_old = row[5]
-                                    product.flag = row[6]
-                                    product.ref = row[7]
-                                    product.slug = row[8].replace(" ", "-")
-                                    product.active = row[9]
-                                    product.soldout = row[10]
-                                    product.offer = row[11]
-                                    product.home = row[12]
-                                    product.image_alterna = row[13]
+                                    product.name_extend = str(row[1])
+                                    product.description = str(row[2])
+                                    product.price1 = int(row[3])
+                                    product.price2 = int(row[4])
+                                    product.price_old = int(row[5])
+                                    product.flag = str(row[6])
+                                    product.ref = str(row[7])
+                                    product.slug = str(row[8]).replace(" ", "-")
+                                    product.active = str(row[9])
+                                    product.soldout = str(row[10])
+                                    product.offer = str(row[11])
+                                    product.home = str(row[12])
+                                    product.image_alterna = str(row[13])
                                     product.save()
 
                                 try:
                                     # Intenta obtener la relacion categoría_producto existente por código
                                     category_product = CategoryProduct.objects.get(
-                                        product_id=row[0]
+                                        product_id=str(row[0])
                                     )
                                     print(f"Error al procesar el archivo CSV")
                                 except ObjectDoesNotExist:
                                     category_product = CategoryProduct(
-                                        product_id=row[0],
+                                        product_id=str(row[0]),
                                         category_id=category.id,
                                     )
                                     category_product.save()
