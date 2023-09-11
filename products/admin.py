@@ -115,19 +115,6 @@ class ProductAdmin(admin.ModelAdmin):
                                     category.save()
 
                                 try:
-                                    # Intenta obtener la relacion categoría_producto existente por código
-                                    category_product = CategoryProduct.objects.get(
-                                        product_id=row[0]
-                                    )
-                                    print(f"Error al procesar el archivo CSV")
-                                except ObjectDoesNotExist:
-                                    category_product = CategoryProduct(
-                                        product_id=row[0],
-                                        category_id=row[14],
-                                    )
-                                    category_product.save()
-                                    print(f"Error al procesar el archivo CSV")
-                                try:
                                     # Intenta obtener el producto existente por codigo
                                     product = Product.objects.get(codigo=row[0])
                                 except ObjectDoesNotExist:
@@ -168,6 +155,20 @@ class ProductAdmin(admin.ModelAdmin):
                                     product.home = row[12]
                                     product.image_alterna = row[13]
                                     product.save()
+                                
+                                try:
+                                    # Intenta obtener la relacion categoría_producto existente por código
+                                    category_product = CategoryProduct.objects.get(
+                                        product_id=row[0]
+                                    )
+                                    print(f"Error al procesar el archivo CSV")
+                                except ObjectDoesNotExist:
+                                    category_product = CategoryProduct(
+                                        product_id=row[0],
+                                        category_id=row[14],
+                                    )
+                                    category_product.save()
+                                    print(f"Error al procesar el archivo CSV")
 
                 except Exception as e:
                     # Manejar errores generales aquí, por ejemplo, registrarlos o mostrar un mensaje de error
