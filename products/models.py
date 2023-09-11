@@ -20,6 +20,9 @@ class Product(models.Model):
     name_extend = models.CharField(
         max_length=200, unique=True, verbose_name=("Nombre Producto")
     )
+    qty = models.IntegerField(
+        blank=True, null=True, verbose_name=("Cantidad")
+    )
     images = CloudinaryField(
         "Imagen",
         blank=True,

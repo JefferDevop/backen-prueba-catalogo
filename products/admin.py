@@ -61,10 +61,15 @@ class ProductAdmin(admin.ModelAdmin):
         "codigo",
         "name_extend",
         "ref",
+        "qty",
         "price1",
         "price2",
-        "flag",
-        "modified_date",
+        "flag",     
+        "soldout",
+        "offer",
+        "home",  
+        "images",
+        "image_alterna"
     )
     prepopulated_fields = {"slug": ("flag", "name_extend")}
     list_display_links = ("codigo", "flag", "name_extend")
