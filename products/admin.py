@@ -123,6 +123,7 @@ class ProductAdmin(admin.ModelAdmin):
                                 try:
                                     # Intenta obtener el producto existente por codigo
                                     product = Product.objects.get(codigo=row[0])
+
                                 except ObjectDoesNotExist:
                                     product = None
 
@@ -191,20 +192,19 @@ class ProductAdmin(admin.ModelAdmin):
                                         else product.image_alterna
                                     )
                                     product.save()
-                                    if category != None:
-                                        try:
-                                            # Intenta obtener la relacion categoría_producto existente por código
-                                            category_product = (
-                                                CategoryProduct.objects.get(
-                                                    product_id=row[0]
-                                                )
-                                            )
-                                        except ObjectDoesNotExist:
-                                            category_product = CategoryProduct(
-                                                product_id=str(row[0]),
-                                                category_id=category.id,
-                                            )
-                                            category_product.save()
+
+                                if category != None:
+                                    try:
+                                        # Intenta obtener la relacion categoría_producto existente por código
+                                        category_product = CategoryProduct.objects.get(
+                                            product_id=row[0]
+                                        )
+                                    except ObjectDoesNotExist:
+                                        category_product = CategoryProduct(
+                                            product_id=str(row[0]),
+                                            category_id=category.id,
+                                        )
+                                        category_product.save()
 
                 except Exception as e:
                     # Manejar errores generales aquí, por ejemplo, registrarlos o mostrar un mensaje de error
