@@ -103,7 +103,9 @@ class ProductAdmin(admin.ModelAdmin):
 
                                 try:
                                     # Intenta obtener la categoría existente por código
-                                    category = Category.objects.get(codigo=category_id)
+                                    category = Category.objects.get(
+                                        codigo=int(category_id)
+                                    )
                                 except ObjectDoesNotExist:
                                     # Si la categoría no existe, crea una nueva
                                     category = Category(
@@ -155,7 +157,7 @@ class ProductAdmin(admin.ModelAdmin):
                                     product.home = row[12]
                                     product.image_alterna = row[13]
                                     product.save()
-                                
+
                                 try:
                                     # Intenta obtener la relacion categoría_producto existente por código
                                     category_product = CategoryProduct.objects.get(
