@@ -127,35 +127,37 @@ class ProductAdmin(admin.ModelAdmin):
                                     product = Product(
                                         codigo=str(row[0]),
                                         name_extend=str(row[1]),
-                                        description=str(row[2]),
-                                        price1=int(row[3]),
-                                        price2=int(row[4]),
-                                        price_old=int(row[5]),
-                                        flag=str(row[6]),
-                                        ref=str(row[7]),
+                                        description=str(row[2]) if row[2] else "",
+                                        price1=int(row[3]) if row[3] else "",
+                                        price2=int(row[4]) if row[4] else "",
+                                        price_old=int(row[5]) if row[5] else "",
+                                        flag=str(row[6]) if row[6] else "",
+                                        ref=str(row[7]) if row[7] else "",
                                         slug=str(row[8]).replace(" ", "-"),
                                         active=str(row[9]),
                                         soldout=str(row[10]),
                                         offer=str(row[11]),
                                         home=str(row[12]),
-                                        image_alterna=str(row[13]),
+                                        image_alterna=str(row[13]) if row[13] else "",
                                     )
                                     product.save()
                                 else:
                                     # Si el producto existe, actualiza sus atributos
                                     product.name_extend = str(row[1])
-                                    product.description = str(row[2])
-                                    product.price1 = int(row[3])
-                                    product.price2 = int(row[4])
-                                    product.price_old = int(row[5])
-                                    product.flag = str(row[6])
-                                    product.ref = str(row[7])
+                                    product.description = str(row[2]) if row[2] else ""
+                                    product.price1 = int(row[3]) if row[3] else ""
+                                    product.price2 = int(row[4]) if row[4] else ""
+                                    product.price_old = int(row[5]) if row[5] else ""
+                                    product.flag = str(row[6]) if row[6] else ""
+                                    product.ref = str(row[7]) if row[7] else ""
                                     product.slug = str(row[8]).replace(" ", "-")
                                     product.active = str(row[9])
                                     product.soldout = str(row[10])
                                     product.offer = str(row[11])
                                     product.home = str(row[12])
-                                    product.image_alterna = str(row[13])
+                                    product.image_alterna = (
+                                        str(row[13]) if row[13] else ""
+                                    )
                                     product.save()
 
                                 try:
