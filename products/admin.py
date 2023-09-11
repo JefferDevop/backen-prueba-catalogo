@@ -105,7 +105,7 @@ class ProductAdmin(admin.ModelAdmin):
 
                             if len(row) >= 5:
                                 category_id = row[14]
-                                category = None
+                                category = ""
 
                                 if category_id != "":
                                     try:
@@ -194,7 +194,7 @@ class ProductAdmin(admin.ModelAdmin):
                                         else product.image_alterna
                                     )
                                     product.save()
-                                    if category != None:
+                                    if category != "":
                                         try:
                                             # Intenta obtener la relacion categoría_producto existente por código
                                             category_product = (
