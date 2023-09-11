@@ -7,7 +7,6 @@ from django.core.exceptions import ObjectDoesNotExist
 from .models import Product, Category, CategoryProduct, Attribut, Gallery
 
 
-
 # ------------------------------------------
 
 # admin.site.index_title = 'Panel Administrativo'
@@ -58,10 +57,10 @@ class CsvImportForm(forms.Form):
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = (
-        "active", 
+        "active",
         "codigo",
-        "name_extend",               
-        "ref",      
+        "name_extend",
+        "ref",
         "price1",
         "price2",
         "flag",
@@ -94,7 +93,7 @@ class ProductAdmin(admin.ModelAdmin):
                             continue  # Skip the header row
                         else:
                             row = row.strip()  # Remove leading/trailing whitespaces
-                            row = row.split(';')
+                            row = row.split(";")
                             # row = row.replace(
                             #     ";", " "
                             # )  # Replace semicolons with spaces
@@ -111,15 +110,15 @@ class ProductAdmin(admin.ModelAdmin):
                                         codigo=category_id,
                                         name=category_id,
                                         slug=category_id,
-                                        image_alterna="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4gk1589Gg7NsjcTVBb-jFRPxRoEOKwY3pUQ&usqp=CAU"
+                                        image_alterna="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4gk1589Gg7NsjcTVBb-jFRPxRoEOKwY3pUQ&usqp=CAU",
                                     )
                                 category.save()
-                            
+
                                 try:
                                     # Intenta obtener el producto existente por codigo
                                     product = Product.objects.get(codigo=row[0])
                                 except ObjectDoesNotExist:
-                                    product = None                                    
+                                    product = None
 
                                 # Si el producto no existe, crea uno nuevo
                                 if product is None:
@@ -132,43 +131,43 @@ class ProductAdmin(admin.ModelAdmin):
                                         price_old=row[5],
                                         flag=row[6],
                                         ref=row[7],
-                                        slug = row[8].replace(" ", "-"),
-                                        active = row[9],
-                                        soldout = row[10],
-                                        offer = row[11],
-                                        home = row[12],    
-                                        image_alterna = row[13],                                     
+                                        slug=row[8].replace(" ", "-"),
+                                        active=row[9],
+                                        soldout=row[10],
+                                        offer=row[11],
+                                        home=row[12],
+                                        image_alterna=row[13],
                                     )
-                                    product.save()                                  
+                                    product.save()
                                 else:
                                     # Si el producto existe, actualiza sus atributos
-                                    product.name_extend=row[1]
-                                    product.description=row[2]
-                                    product.price1=row[3]
-                                    product.price2=row[4]
-                                    product.price_old=row[5]
-                                    product.flag=row[6]
-                                    product.ref=row[7]
+                                    product.name_extend = row[1]
+                                    product.description = row[2]
+                                    product.price1 = row[3]
+                                    product.price2 = row[4]
+                                    product.price_old = row[5]
+                                    product.flag = row[6]
+                                    product.ref = row[7]
                                     product.slug = row[8].replace(" ", "-")
                                     product.active = row[9]
                                     product.soldout = row[10]
                                     product.offer = row[11]
-                                    product.home = row[12]  
-                                    product.image_alterna = row[13]                                 
-                                    product.save()  
+                                    product.home = row[12]
+                                    product.image_alterna = row[13]
+                                    product.save()
 
                                     # Crea una instancia de CategoryProduct
                                     category_product = CategoryProduct(
                                         product_id=int(row[0]),
-                                        category_id=int(row[14]),                                      
+                                        category_id=int(row[14]),
                                     )
-                                category_product.save()                                 
+                                    category_product.save()
                 except Exception as e:
                     # Manejar errores generales aquí, por ejemplo, registrarlos o mostrar un mensaje de error
                     print(f"Error al procesar el archivo CSV: {str(e)}")
 
         form = CsvImportForm()
-        data = {"form": form}  
+        data = {"form": form}
         return render(request, "admin/csv_product.html", data)
 
 
@@ -199,7 +198,7 @@ class CategoryAdmin(admin.ModelAdmin):
                             continue  # Skip the header row
                         else:
                             row = row.strip()  # Remove leading/trailing whitespaces
-                            row = row.split(';')
+                            row = row.split(";")
                             # row = row.replace(
                             #     ";", " "
                             # )  # Replace semicolons with spaces
