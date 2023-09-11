@@ -67,7 +67,7 @@ class Product(models.Model):
         verbose_name_plural = "Productos"
 
     def __str__(self):
-        return f"{self.codigo}"
+        return {self.codigo}
 
 
 class Category(models.Model):
