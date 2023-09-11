@@ -98,7 +98,7 @@ class ProductAdmin(admin.ModelAdmin):
                             #     ";", " "
                             # )  # Replace semicolons with spaces
 
-                            if len(row) >= 5:                               
+                            if len(row) >= 5:
                                 category_id = row[14]
 
                                 try:
@@ -151,11 +151,6 @@ class ProductAdmin(admin.ModelAdmin):
                                         image_alterna=row[13],
                                     )
                                     product.save()
-                                    category_product = CategoryProduct(
-                                        categoryProduct_id=row[0],
-                                        categoryproduct_codigo=row[14],
-                                    )
-                                    category_product.save()
                                 else:
                                     # Si el producto existe, actualiza sus atributos
                                     product.name_extend = row[1]
@@ -172,8 +167,6 @@ class ProductAdmin(admin.ModelAdmin):
                                     product.home = row[12]
                                     product.image_alterna = row[13]
                                     product.save()
-
-                                    # Crea una instancia de CategoryProduct
 
                 except Exception as e:
                     # Manejar errores generales aquí, por ejemplo, registrarlos o mostrar un mensaje de error
