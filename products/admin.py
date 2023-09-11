@@ -239,17 +239,14 @@ class CategoryAdmin(admin.ModelAdmin):
 
                     for i, row in enumerate(csv_data):
                         if i == 0:
-                            continue  # Skip the header row
+                            continue 
                         else:
-                            row = row.strip()  # Remove leading/trailing whitespaces
-                            row = row.split(";")
-                            # row = row.replace(
-                            #     ";", " "
-                            # )  # Replace semicolons with spaces
+                            row = row.strip()
+                            row = row.split(";")                          
 
-                            if len(row) >= 5:
+                            if len(row) >= 4:
                                 try:
-                                    # Intenta obtener la categoría existente por nombre
+                                    # Intenta obtener la categoría existente por Código
                                     category = Category.objects.get(codigo=row[0])
                                 except ObjectDoesNotExist:
                                     category = None
