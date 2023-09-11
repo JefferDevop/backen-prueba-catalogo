@@ -110,7 +110,7 @@ class ProductAdmin(admin.ModelAdmin):
                                         codigo=category_id,
                                         name=category_id,
                                         slug=category_id,
-                                        image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4gk1589Gg7NsjcTVBb-jFRPxRoEOKwY3pUQ&usqp=CAU",
+                                        image_alterna="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4gk1589Gg7NsjcTVBb-jFRPxRoEOKwY3pUQ&usqp=CAU",
                                     )
                                 category.save()
 
