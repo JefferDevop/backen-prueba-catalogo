@@ -111,7 +111,7 @@ class ProductAdmin(admin.ModelAdmin):
                                         codigo=category_id,
                                         name=category_id,
                                         slug=category_id,
-                                        image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4gk1589Gg7NsjcTVBb-jFRPxRoEOKwY3pUQ&usqp=CAU"
+                                        image_alterna="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4gk1589Gg7NsjcTVBb-jFRPxRoEOKwY3pUQ&usqp=CAU"
                                     )
                                 category.save()
                             
@@ -162,7 +162,7 @@ class ProductAdmin(admin.ModelAdmin):
                                         product_id=int(row[0]),
                                         category_id=int(row[14]),                                      
                                     )
-                                    category_product.save()                                 
+                                category_product.save()                                 
                 except Exception as e:
                     # Manejar errores generales aquí, por ejemplo, registrarlos o mostrar un mensaje de error
                     print(f"Error al procesar el archivo CSV: {str(e)}")
