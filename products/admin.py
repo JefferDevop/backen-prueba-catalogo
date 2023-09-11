@@ -101,9 +101,7 @@ class ProductAdmin(admin.ModelAdmin):
                             if len(row) >= 5:
                                 category_id = row[14]
 
-                                if category_id == "":
-                                    category_id = None
-                                else:
+                                if category_id != "":
                                     try:
                                         # Intenta obtener la categoría existente por código
                                         category = Category.objects.get(
@@ -118,6 +116,7 @@ class ProductAdmin(admin.ModelAdmin):
                                             image_alterna="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4gk1589Gg7NsjcTVBb-jFRPxRoEOKwY3pUQ&usqp=CAU",
                                         )
                                         category.save()
+                            
 
                                 try:
                                     # Intenta obtener el producto existente por codigo
