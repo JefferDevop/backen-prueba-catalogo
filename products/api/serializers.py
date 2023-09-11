@@ -29,6 +29,7 @@ class ProductSerializer(ModelSerializer):
             "image_alterna",
             "price_old",
             "price1",
+            "qty",
             "price2",
             "active",
             "soldout",
