@@ -14,7 +14,7 @@ from django.shortcuts import render
 
 
 class Product(models.Model):
-    codigo = models.BigAutoField(
+    codigo = models.CharField(max_length=50,
         primary_key=True, auto_created=True, verbose_name=("Código")
     )
     name_extend = models.CharField(
