@@ -177,7 +177,7 @@ class ProductAdmin(admin.ModelAdmin):
                                         else product.soldout
                                     )
                                     product.offer = (
-                                        str(row[11]) if row[11] != "" else product.ofert
+                                        str(row[11]) if row[11] != "" else product.offer
                                     )
                                     product.home = (
                                         str(row[12]) if row[12] != "" else product.home
