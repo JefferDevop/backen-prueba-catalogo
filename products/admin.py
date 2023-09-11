@@ -65,7 +65,9 @@ class ProductAdmin(admin.ModelAdmin):
         "price1",
         "price2",
         "flag",
-        "modified_date",
+        "soldout",
+        "offer",
+        "home",        
     )
     prepopulated_fields = {"slug": ("flag", "name_extend")}
     list_display_links = ("codigo", "flag", "name_extend")
