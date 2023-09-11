@@ -119,13 +119,14 @@ class ProductAdmin(admin.ModelAdmin):
                                     category_product = CategoryProduct.objects.get(
                                         product_id=row[0]
                                     )
+                                    print(f"Error al procesar el archivo CSV")
                                 except ObjectDoesNotExist:
                                     category_product = CategoryProduct(
                                         product_id=row[0],
                                         category_id=row[14],
                                     )
                                     category_product.save()
-
+                                    print(f"Error al procesar el archivo CSV")
                                 try:
                                     # Intenta obtener el producto existente por codigo
                                     product = Product.objects.get(codigo=row[0])
