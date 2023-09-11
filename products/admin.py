@@ -98,8 +98,7 @@ class ProductAdmin(admin.ModelAdmin):
                             #     ";", " "
                             # )  # Replace semicolons with spaces
 
-                            if len(row) >= 5:
-                                product_id = row[0]
+                            if len(row) >= 5:                               
                                 category_id = row[14]
 
                                 try:
@@ -118,12 +117,12 @@ class ProductAdmin(admin.ModelAdmin):
                                 try:
                                     # Intenta obtener la relacion categoría_producto existente por código
                                     category_product = CategoryProduct.objects.get(
-                                        product_id=product_id
+                                        product_id=row[0]
                                     )
                                 except CategoryProduct.DoesNotExist:
                                     category_product = CategoryProduct(
-                                        categoryProduct_id=row[0],
-                                        categoryproduct_codigo=row[14],
+                                        product_id=row[0],
+                                        category_id=row[14],
                                     )
                                     category_product.save()
 
