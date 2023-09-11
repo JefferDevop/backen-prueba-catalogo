@@ -158,8 +158,8 @@ class ProductAdmin(admin.ModelAdmin):
 
                                     # Crea una instancia de CategoryProduct
                                     category_product = CategoryProduct(
-                                        product_id=int(row[0]),
-                                        category_id=int(row[14]),
+                                        product_id=row[0],
+                                        category_id=row[14],
                                     )
                                     category_product.save()
                 except Exception as e:
