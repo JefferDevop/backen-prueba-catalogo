@@ -128,9 +128,9 @@ class ProductAdmin(admin.ModelAdmin):
                                         codigo=str(row[0]),
                                         name_extend=str(row[1]),
                                         description=str(row[2]) if row[2] else "",
-                                        price1=int(row[3]) if row[3] else "",
-                                        price2=int(row[4]) if row[4] else "",
-                                        price_old=int(row[5]) if row[5] else "",
+                                        price1=int(row[3]) if row[3] else None,
+                                        price2=int(row[4]) if row[4] else None,
+                                        price_old=int(row[5]) if row[5] else None,
                                         flag=str(row[6]) if row[6] else "",
                                         ref=str(row[7]) if row[7] else "",
                                         slug=str(row[8]).replace(" ", "-"),
@@ -145,9 +145,9 @@ class ProductAdmin(admin.ModelAdmin):
                                     # Si el producto existe, actualiza sus atributos
                                     product.name_extend = str(row[1])
                                     product.description = str(row[2]) if row[2] else ""
-                                    product.price1 = int(row[3]) if row[3] else ""
-                                    product.price2 = int(row[4]) if row[4] else ""
-                                    product.price_old = int(row[5]) if row[5] else ""
+                                    product.price1 = int(row[3]) if row[3] else None
+                                    product.price2 = int(row[4]) if row[4] else None
+                                    product.price_old = int(row[5]) if row[5] else None
                                     product.flag = str(row[6]) if row[6] else ""
                                     product.ref = str(row[7]) if row[7] else ""
                                     product.slug = str(row[8]).replace(" ", "-")
