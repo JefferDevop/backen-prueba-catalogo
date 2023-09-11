@@ -101,20 +101,21 @@ class ProductAdmin(admin.ModelAdmin):
                             if len(row) >= 5:
                                 category_id = row[14]
 
-                                try:
-                                    # Intenta obtener la categoría existente por código
-                                    category = Category.objects.get(
-                                        codigo=int(category_id) if category_id else None
-                                    )
-                                except ObjectDoesNotExist:
-                                    # Si la categoría no existe, crea una nueva
-                                    category = Category(
-                                        codigo=category_id,
-                                        name=category_id,
-                                        slug=category_id,
-                                        image_alterna="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4gk1589Gg7NsjcTVBb-jFRPxRoEOKwY3pUQ&usqp=CAU",
-                                    )
-                                    category.save()
+                                if category_id != "":
+                                    try:
+                                        # Intenta obtener la categoría existente por código
+                                        category = Category.objects.get(
+                                            codigo=int(category_id)
+                                        )
+                                    except ObjectDoesNotExist:
+                                        # Si la categoría no existe, crea una nueva
+                                        category = Category(
+                                            codigo=category_id,
+                                            name=category_id,
+                                            slug=category_id,
+                                            image_alterna="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4gk1589Gg7NsjcTVBb-jFRPxRoEOKwY3pUQ&usqp=CAU",
+                                        )
+                                        category.save()
 
                                 try:
                                     # Intenta obtener el producto existente por codigo
@@ -143,7 +144,11 @@ class ProductAdmin(admin.ModelAdmin):
                                     product.save()
                                 else:
                                     # Si el producto existe, actualiza sus atributos
-                                    product.name_extend = str(row[1])
+                                    product.name_extend = (
+                                        str(row[1])
+                                        if row[1] != ""
+                                        else product.name_extend
+                                    )
                                     product.description = (
                                         str(row[2])
                                         if row[2] != ""
