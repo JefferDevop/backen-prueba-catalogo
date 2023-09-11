@@ -104,7 +104,7 @@ class ProductAdmin(admin.ModelAdmin):
                                 try:
                                     # Intenta obtener la categoría existente por código
                                     category = Category.objects.get(codigo=category_id)
-                                except Category.DoesNotExist:
+                                except ObjectDoesNotExist:
                                     # Si la categoría no existe, crea una nueva
                                     category = Category(
                                         codigo=category_id,
