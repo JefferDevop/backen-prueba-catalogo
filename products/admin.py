@@ -69,7 +69,7 @@ class ProductAdmin(admin.ModelAdmin):
         "offer",
         "home",  
         "images",
-        "image_alterna"
+        "image_alterna",
     )
     prepopulated_fields = {"slug": ("flag", "name_extend")}
     list_display_links = ("codigo", "flag", "name_extend")
