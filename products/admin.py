@@ -101,7 +101,7 @@ class ProductAdmin(admin.ModelAdmin):
                             if len(row) >= 5:
                                 category_id = row[14]
 
-                                if category_id != "":
+                                if row[14] != "":
                                     try:
                                         # Intenta obtener la categoría existente por código
                                         category = Category.objects.get(
