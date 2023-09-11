@@ -56,17 +56,17 @@ class CsvImportForm(forms.Form):
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = (        
+    list_display = (
         "codigo",
         "name_extend",
         "ref",
         "qty",
         "price1",
-        "price2",       
+        "price2",
         "active",
         "soldout",
         "offer",
-        "home",        
+        "home",
     )
     prepopulated_fields = {"slug": ("flag", "name_extend")}
     list_display_links = ("codigo", "flag", "name_extend")
@@ -196,7 +196,7 @@ class ProductAdmin(admin.ModelAdmin):
                                             # Intenta obtener la relacion categoría_producto existente por código
                                             category_product = (
                                                 CategoryProduct.objects.get(
-                                                    product_id=str(row[0])
+                                                    product_id=row[0]
                                                 )
                                             )
                                         except ObjectDoesNotExist:
