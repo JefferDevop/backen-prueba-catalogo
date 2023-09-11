@@ -99,6 +99,7 @@ class ProductAdmin(admin.ModelAdmin):
                             # )  # Replace semicolons with spaces
 
                             if len(row) >= 5:
+                                product_id = row[0]
                                 category_id = row[14]
 
                                 try:
@@ -112,7 +113,19 @@ class ProductAdmin(admin.ModelAdmin):
                                         slug=category_id,
                                         image_alterna="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4gk1589Gg7NsjcTVBb-jFRPxRoEOKwY3pUQ&usqp=CAU",
                                     )
-                                category.save()
+                                    category.save()
+
+                                try:
+                                    # Intenta obtener la relacion categoría_producto existente por código
+                                    category_product = CategoryProduct.objects.get(
+                                        product_id=product_id
+                                    )
+                                except CategoryProduct.DoesNotExist:
+                                    category_product = CategoryProduct(
+                                        categoryProduct_id=row[0],
+                                        categoryproduct_codigo=row[14],
+                                    )
+                                    category_product.save()
 
                                 try:
                                     # Intenta obtener el producto existente por codigo
@@ -139,6 +152,11 @@ class ProductAdmin(admin.ModelAdmin):
                                         image_alterna=row[13],
                                     )
                                     product.save()
+                                    category_product = CategoryProduct(
+                                        categoryProduct_id=row[0],
+                                        categoryproduct_codigo=row[14],
+                                    )
+                                    category_product.save()
                                 else:
                                     # Si el producto existe, actualiza sus atributos
                                     product.name_extend = row[1]
@@ -157,7 +175,7 @@ class ProductAdmin(admin.ModelAdmin):
                                     product.save()
 
                                     # Crea una instancia de CategoryProduct
-                                    
+
                 except Exception as e:
                     # Manejar errores generales aquí, por ejemplo, registrarlos o mostrar un mensaje de error
                     print(f"Error al procesar el archivo CSV: {str(e)}")
