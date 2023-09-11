@@ -122,7 +122,7 @@ class ProductAdmin(admin.ModelAdmin):
 
                                 try:
                                     # Intenta obtener el producto existente por codigo
-                                    product = Product.objects.get(codigo=str(row[0]))
+                                    product = Product.objects.get(codigo=row[0])
                                 except ObjectDoesNotExist:
                                     product = None
 
