@@ -165,7 +165,7 @@ class ProductAdmin(admin.ModelAdmin):
                                 except ObjectDoesNotExist:
                                     category_product = CategoryProduct(
                                         product_id=row[0],
-                                        category_id=row[14],
+                                        category_id=category.id,
                                     )
                                     category_product.save()
                                     print(f"Error al procesar el archivo CSV")
