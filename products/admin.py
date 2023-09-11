@@ -61,6 +61,7 @@ class ProductAdmin(admin.ModelAdmin):
         "codigo",
         "name_extend",
         "ref",
+        "qty",
         "price1",
         "price2",
         "flag",

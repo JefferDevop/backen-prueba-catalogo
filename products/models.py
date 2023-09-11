@@ -48,6 +48,9 @@ class Product(models.Model):
     ref = models.CharField(
         max_length=200, blank=True, null=True, verbose_name=("Referencia")
     )
+    qty = models.BigIntegerField(
+        blank=True, null=True, verbose_name=("Cantidad")
+    )
     slug = models.SlugField(max_length=200, unique=True, verbose_name=("Url"))
     active = models.BooleanField(default=True, verbose_name=("Activo"))
     soldout = models.BooleanField(default=False, verbose_name=("Agotado"))
