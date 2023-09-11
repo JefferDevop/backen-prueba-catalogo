@@ -144,19 +144,43 @@ class ProductAdmin(admin.ModelAdmin):
                                 else:
                                     # Si el producto existe, actualiza sus atributos
                                     product.name_extend = str(row[1])
-                                    product.description = str(row[2]) if row[2] else ""
+                                    product.description = (
+                                        str(row[2])
+                                        if row[2] != ""
+                                        else product.description
+                                    )
                                     product.price1 = int(row[3]) if row[3] else None
                                     product.price2 = int(row[4]) if row[4] else None
                                     product.price_old = int(row[5]) if row[5] else None
-                                    product.flag = str(row[6]) if row[6] else ""
-                                    product.ref = str(row[7]) if row[7] else ""
-                                    product.slug = str(row[8]).replace(" ", "-")
-                                    product.active = str(row[9])
-                                    product.soldout = str(row[10])
-                                    product.offer = str(row[11])
-                                    product.home = str(row[12])
+                                    product.flag = (
+                                        str(row[6]) if row[6] != "" else product.flag
+                                    )
+                                    product.ref = (
+                                        str(row[7]) if row[7] != "" else product.ref
+                                    )
+                                    product.slug = (
+                                        str(row[8]).replace(" ", "-")
+                                        if row[8] != ""
+                                        else product.slug
+                                    )
+                                    product.active = (
+                                        str(row[9]) if row[9] != "" else product.active
+                                    )
+                                    product.soldout = (
+                                        str(row[10])
+                                        if row[10] != ""
+                                        else product.soldout
+                                    )
+                                    product.offer = (
+                                        str(row[11]) if row[11] != "" else product.ofert
+                                    )
+                                    product.home = (
+                                        str(row[12]) if row[12] != "" else product.home
+                                    )
                                     product.image_alterna = (
-                                        str(row[13]) if row[13] else ""
+                                        str(row[13])
+                                        if row[2] != ""
+                                        else product.image_alterna
                                     )
                                     product.save()
 
