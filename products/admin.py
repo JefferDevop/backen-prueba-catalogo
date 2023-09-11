@@ -100,6 +100,7 @@ class ProductAdmin(admin.ModelAdmin):
 
                             if len(row) >= 5:
                                 category_id = row[14]
+                                category = None
 
                                 if category_id != "":
                                     try:
@@ -116,7 +117,6 @@ class ProductAdmin(admin.ModelAdmin):
                                             image_alterna="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4gk1589Gg7NsjcTVBb-jFRPxRoEOKwY3pUQ&usqp=CAU",
                                         )
                                         category.save()
-                            
 
                                 try:
                                     # Intenta obtener el producto existente por codigo
@@ -189,20 +189,20 @@ class ProductAdmin(admin.ModelAdmin):
                                         else product.image_alterna
                                     )
                                     product.save()
-
-                                try:
-                                    # Intenta obtener la relacion categoría_producto existente por código
-                                    category_product = CategoryProduct.objects.get(
-                                        product_id=str(row[0])
-                                    )
-                                    print(f"Error al procesar el archivo CSV")
-                                except ObjectDoesNotExist:
-                                    category_product = CategoryProduct(
-                                        product_id=str(row[0]),
-                                        category_id=category.id,
-                                    )
-                                    category_product.save()
-                                    print(f"Error al procesar el archivo CSV")
+                                    if category != None:
+                                        try:
+                                            # Intenta obtener la relacion categoría_producto existente por código
+                                            category_product = (
+                                                CategoryProduct.objects.get(
+                                                    product_id=str(row[0])
+                                                )
+                                            )
+                                        except ObjectDoesNotExist:
+                                            category_product = CategoryProduct(
+                                                product_id=str(row[0]),
+                                                category_id=category.id,
+                                            )
+                                            category_product.save()
 
                 except Exception as e:
                     # Manejar errores generales aquí, por ejemplo, registrarlos o mostrar un mensaje de error
