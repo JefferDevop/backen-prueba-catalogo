@@ -119,7 +119,7 @@ class ProductAdmin(admin.ModelAdmin):
                                     category_product = CategoryProduct.objects.get(
                                         product_id=row[0]
                                     )
-                                except CategoryProduct.DoesNotExist:
+                                except ObjectDoesNotExist:
                                     category_product = CategoryProduct(
                                         product_id=row[0],
                                         category_id=row[14],
