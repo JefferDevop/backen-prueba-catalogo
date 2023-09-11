@@ -14,14 +14,14 @@ from django.shortcuts import render
 
 
 class Product(models.Model):
-    codigo = models.CharField(max_length=50,
-        primary_key=True, auto_created=True, verbose_name=("Código")
+    codigo = models.CharField(
+        max_length=50, primary_key=True, auto_created=True, verbose_name=("Código")
     )
     name_extend = models.CharField(
         max_length=200, unique=True, verbose_name=("Nombre Producto")
     )
     qty = models.IntegerField(
-        blank=True, null=True, verbose_name=("Cantidad")
+        blank=True, null=True, default=0, verbose_name=("Cantidad")
     )
     images = CloudinaryField(
         "Imagen",
@@ -32,7 +32,9 @@ class Product(models.Model):
         ],
         format="webp",
     )
-    image_alterna = models.CharField(max_length=600, null=True, blank=True, verbose_name=("Imagen Alterna"))
+    image_alterna = models.CharField(
+        max_length=600, null=True, blank=True, verbose_name=("Imagen Alterna")
+    )
     description = models.TextField(
         max_length=4000, blank=True, verbose_name=("Descripción el producto")
     )
@@ -65,7 +67,7 @@ class Product(models.Model):
         verbose_name_plural = "Productos"
 
     def __str__(self):
-        return f"{self.name_extend} : cod:{self.codigo}"
+        return f"{self.codigo}"
 
 
 class Category(models.Model):
@@ -96,6 +98,7 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+
 class CategoryProduct(models.Model):
     product = models.ForeignKey(
         Product, on_delete=models.CASCADE, verbose_name=("Producto")
@@ -113,6 +116,7 @@ class CategoryProduct(models.Model):
     def __str__(self):
         return str(self.category)
 
+
 class Gallery(models.Model):
     product = models.ForeignKey(
         Product, default=None, on_delete=models.CASCADE, verbose_name=("Producto")
@@ -125,6 +129,7 @@ class Gallery(models.Model):
     class Meta:
         verbose_name = "Imagen"
         verbose_name_plural = "Galeria de Imagenes"
+
 
 class Attribut(models.Model):
     name = models.CharField(max_length=50, unique=True, verbose_name=("Nombre"))
