@@ -100,7 +100,7 @@ class ProductAdmin(admin.ModelAdmin):
                             #     ";", " "
                             # )  # Replace semicolons with spaces
 
-                            if len(row) >= 5:
+                            if len(row) >= 16:
                                 category_id = row[14]
                                 category = None
 
@@ -144,6 +144,7 @@ class ProductAdmin(admin.ModelAdmin):
                                         offer=str(row[11]),
                                         home=str(row[12]),
                                         image_alterna=str(row[13]) if row[13] else "",
+                                        qty=int(row[14]) if row[14] else None,
                                     )
                                     product.save()
                                 else:
@@ -191,6 +192,7 @@ class ProductAdmin(admin.ModelAdmin):
                                         if row[2] != ""
                                         else product.image_alterna
                                     )
+                                    product.qty = int(row[14]) if row[14] else None
                                     product.save()
 
                                 if category != None:
@@ -239,10 +241,10 @@ class CategoryAdmin(admin.ModelAdmin):
 
                     for i, row in enumerate(csv_data):
                         if i == 0:
-                            continue 
+                            continue
                         else:
                             row = row.strip()
-                            row = row.split(";")                          
+                            row = row.split(";")
 
                             if len(row) >= 4:
                                 try:
