@@ -5,7 +5,7 @@ from products.models import Gallery, Category, Product, CategoryProduct, Attribu
 class CategorySerializer(ModelSerializer):
     class Meta:
         model = Category
-        fields = ["id", "name", "slug", "image", "image_alterna"]
+        fields = ["id", "codigo", "name", "slug", "image", "image_alterna"]
 
 
 class AttributSerializer(ModelSerializer):

@@ -284,8 +284,16 @@ class CategoryProductAdmin(admin.ModelAdmin):
     list_display_links = ("category", "product")
 
 
+class GalleryAdmin(admin.ModelAdmin):
+    list_display = ('codigo') 
+    list_display_links = ('codigo')
+    # search_fields = ('codigo', 'flag', 'ref', 'name_extend') 
+    # inlines = [GalleryInline]
+
+
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Category, CategoryAdmin)
+admin.site.register(Gallery, GalleryAdmin)
 # admin.site.register(Attribut, AttributAdmin)
 # admin.site.register(CategoryProduct, CategoryProductAdmin)
 # admin.site.register(AttributProduct, AttributProductAdmin)

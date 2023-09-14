@@ -72,7 +72,6 @@ class Category(models.Model):
     codigo = models.CharField(max_length=10, unique=True, verbose_name=("Código"))
     name = models.CharField(max_length=50, unique=True, verbose_name=("Nombre"))
     slug = models.SlugField(max_length=100, unique=True, verbose_name=("Url"))
-    image_alterna = models.CharField(max_length=600, null=True, blank=True)
     image = CloudinaryField(
         "Imagen",
         blank=True,
@@ -82,6 +81,7 @@ class Category(models.Model):
         ],
         format="webp",
     )
+    image_alterna = models.CharField(max_length=600, null=True, blank=True, verbose_name=("Imagen Alterna"))
     created_date = models.DateTimeField(auto_now_add=True, verbose_name=("Creado"))
     modified_date = models.DateTimeField(auto_now=True, verbose_name=("Modificado"))
     # history = HistoricalRecords()
@@ -126,7 +126,7 @@ class Gallery(models.Model):
         ],
         format="webp",
     )
-    image_alterna = models.CharField(max_length=600, null=True, blank=True)
+    image_alterna = models.CharField(max_length=600, null=True, blank=True, verbose_name=("Imagen Alterna"))
     def __str__(self):
         return str(self.product)
 
