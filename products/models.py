@@ -12,10 +12,9 @@ global_schema_name = None
 
 from django.shortcuts import render
 
-
 class Product(models.Model):
-    codigo = models.CharField(max_length=50,
-        primary_key=True, auto_created=True, verbose_name=("Código")
+    codigo = models.CharField(
+        max_length=50, primary_key=True, auto_created=True, verbose_name=("Código")
     )
     name_extend = models.CharField(
         max_length=200, unique=True, verbose_name=("Nombre Producto")
@@ -29,7 +28,9 @@ class Product(models.Model):
         ],
         format="webp",
     )
-    image_alterna = models.CharField(max_length=600, null=True, blank=True, verbose_name=("Imagen Alterna"))
+    image_alterna = models.CharField(
+        max_length=600, null=True, blank=True, verbose_name=("Imagen Alterna")
+    )
     description = models.TextField(
         max_length=4000, blank=True, verbose_name=("Descripción el producto")
     )
@@ -48,9 +49,7 @@ class Product(models.Model):
     ref = models.CharField(
         max_length=200, blank=True, null=True, verbose_name=("Referencia")
     )
-    qty = models.BigIntegerField(
-        blank=True, null=True, verbose_name=("Cantidad")
-    )
+    qty = models.BigIntegerField(blank=True, null=True, verbose_name=("Cantidad"))
     slug = models.SlugField(max_length=200, unique=True, verbose_name=("Url"))
     active = models.BooleanField(default=True, verbose_name=("Activo"))
     soldout = models.BooleanField(default=False, verbose_name=("Agotado"))
@@ -67,7 +66,6 @@ class Product(models.Model):
     def __str__(self):
         return f"{self.name_extend} : cod:{self.codigo}"
 
-
 class Category(models.Model):
     codigo = models.CharField(max_length=10, unique=True, verbose_name=("Código"))
     name = models.CharField(max_length=50, unique=True, verbose_name=("Nombre"))
@@ -81,7 +79,9 @@ class Category(models.Model):
         ],
         format="webp",
     )
-    image_alterna = models.CharField(max_length=600, null=True, blank=True, verbose_name=("Imagen Alterna"))
+    image_alterna = models.CharField(
+        max_length=600, null=True, blank=True, verbose_name=("Imagen Alterna")
+    )
     created_date = models.DateTimeField(auto_now_add=True, verbose_name=("Creado"))
     modified_date = models.DateTimeField(auto_now=True, verbose_name=("Modificado"))
     # history = HistoricalRecords()
@@ -126,7 +126,10 @@ class Gallery(models.Model):
         ],
         format="webp",
     )
-    image_alterna = models.CharField(max_length=600, null=True, blank=True, verbose_name=("Imagen Alterna"))
+    image_alterna = models.CharField(
+        max_length=600, null=True, blank=True, verbose_name=("Imagen Alterna")
+    )
+
     def __str__(self):
         return str(self.product)
 
