@@ -314,6 +314,7 @@ class GalleryAdmin(admin.ModelAdmin):
                             row = row.split(";")
 
                             if len(row) >= 3:
+                                gallery = None
                                 try:
                                     # Intenta obtener la galleria existente
                                     product = Product.objects.get(codigo=str(row[0]))
