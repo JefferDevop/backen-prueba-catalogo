@@ -290,8 +290,8 @@ class CategoryProductAdmin(admin.ModelAdmin):
 #     # search_fields = ('codigo', 'flag', 'ref', 'name_extend')
 #     # inlines = [GalleryInline]
 
-admin.site.register(Gallery)
 
+admin.site.register(Gallery)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Category, CategoryAdmin)
 # admin.site.register(Gallery, GalleryAdmin)
