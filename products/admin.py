@@ -325,7 +325,7 @@ class GalleryAdmin(admin.ModelAdmin):
                                     print("Producto no existe")
                                 else:
                                     gallery = Gallery(
-                                        product=str(row[0]),
+                                        product=gallery,
                                         image=str(row[1]) if row[1] else "",
                                         image_alterna=str(row[2]) if row[2] else "",
                                     )
