@@ -296,7 +296,7 @@ class GalleryAdmin(admin.ModelAdmin):
             path("upload-csv/", self.upload_csv),
         ]
         return new_urls + urls
-    
+
     def upload_csv(self, request):
         if request.method == "POST":
             csv_file = request.FILES.get("csv_upload")
@@ -314,8 +314,22 @@ class GalleryAdmin(admin.ModelAdmin):
                             row = row.split(";")
 
                             if len(row) >= 3:
-                               
-                                print("prueba")
+                                try:
+                                    # Intenta obtener la galleria existente
+                                    product = Product.objects.get(product=str(row[0]))
+                                except ObjectDoesNotExist:
+                                    gallery = None
+
+                                if gallery is None:
+                                    print("Producto no existe")
+                                else:
+                                    gallery = Gallery(
+                                        product=str(row[0]),
+                                        image=str(row[1]) if row[1] else "",
+                                        image_alterna=str(row[2]) if row[2] else "",
+                                    )
+                                    gallery.save()
+
                 except Exception as e:
                     # Manejar errores generales aquí, por ejemplo, registrarlos o mostrar un mensaje de error
                     print(f"Error al procesar el archivo CSV: {str(e)}")
