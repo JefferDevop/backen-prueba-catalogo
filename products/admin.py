@@ -285,8 +285,8 @@ class CategoryProductAdmin(admin.ModelAdmin):
 
 
 class GalleryAdmin(admin.ModelAdmin):
-    list_display = ('codigo') 
-    list_display_links = ('codigo')
+    list_display = ('product') 
+    list_display_links = ('product')
     # search_fields = ('codigo', 'flag', 'ref', 'name_extend') 
     # inlines = [GalleryInline]
 
