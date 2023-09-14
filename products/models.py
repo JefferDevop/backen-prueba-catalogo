@@ -131,7 +131,7 @@ class Gallery(models.Model):
     )
 
     def __str__(self):
-        return self.product
+        return str(self.product)
 
     class Meta:
         verbose_name = "Imagen"
