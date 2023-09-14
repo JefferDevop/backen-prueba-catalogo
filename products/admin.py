@@ -288,7 +288,7 @@ class GalleryAdmin(admin.ModelAdmin):
     list_display = ("product", "image", "image_alterna")
     list_display_links = ("product", "image", "image_alterna")
     # search_fields = ('codigo', 'flag', 'ref', 'name_extend')
-    # inlines = [GalleryInline]
+    inlines = [GalleryInline]
 
 
 admin.site.register(Product, ProductAdmin)
