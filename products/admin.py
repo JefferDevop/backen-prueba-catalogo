@@ -72,7 +72,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_display_links = ("codigo", "flag", "name_extend")
     search_fields = ("codigo", "flag", "ref", "name_extend")
     ordering = ("name_extend",)
-    inlines = [CategoryProductInline]
+    inlines = [CategoryProductInline, GalleryInline]
 
     def get_urls(self):
         urls = super().get_urls()
