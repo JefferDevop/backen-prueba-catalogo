@@ -290,6 +290,40 @@ class GalleryAdmin(admin.ModelAdmin):
     # search_fields = ('codigo', 'flag', 'ref', 'name_extend')
     # inlines = [GalleryInline]
 
+    def get_urls(self):
+        urls = super().get_urls()
+        new_urls = [
+            path("upload-csv/", self.upload_csv),
+        ]
+        return new_urls + urls
+    
+    def upload_csv(self, request):
+        if request.method == "POST":
+            csv_file = request.FILES.get("csv_upload")
+
+            if csv_file:
+                try:
+                    file_data = csv_file.read().decode("utf-8")
+                    csv_data = file_data.split("\n")
+
+                    for i, row in enumerate(csv_data):
+                        if i == 0:
+                            continue
+                        else:
+                            row = row.strip()
+                            row = row.split(";")
+
+                            if len(row) >= 3:
+                               
+                                print("prueba")
+                except Exception as e:
+                    # Manejar errores generales aquí, por ejemplo, registrarlos o mostrar un mensaje de error
+                    print(f"Error al procesar el archivo CSV: {str(e)}")
+
+        form = CsvImportForm()
+        data = {"form": form}
+        return render(request, "admin/csv_gallery.html", data)
+
 
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Category, CategoryAdmin)
