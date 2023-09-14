@@ -41,7 +41,7 @@ class ProductSerializer(ModelSerializer):
 class GallerySerializer(ModelSerializer):
     class Meta:
         model = Gallery
-        fields = ["id", "product", "image"]
+        fields = ["id", "product", "image", "image_alterna",]
 
 
 class CategoryProductSerializer(ModelSerializer):

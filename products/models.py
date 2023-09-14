@@ -74,7 +74,7 @@ class Category(models.Model):
     slug = models.SlugField(max_length=100, unique=True, verbose_name=("Url"))
     image_alterna = models.CharField(max_length=600, null=True, blank=True)
     image = CloudinaryField(
-        "categories/",
+        "Imagen",
         blank=True,
         transformation=[
             {"width": 800, "height": 800, "crop": "limit"},
@@ -117,8 +117,16 @@ class Gallery(models.Model):
     product = models.ForeignKey(
         Product, default=None, on_delete=models.CASCADE, verbose_name=("Producto")
     )
-    image = CloudinaryField("gallery", blank=True)
-
+    image = CloudinaryField(
+        "Imagen",
+        blank=True,
+        transformation=[
+            {"width": 800, "height": 800, "crop": "limit"},
+            {"quality": "auto"},
+        ],
+        format="webp",
+    )
+    image_alterna = models.CharField(max_length=600, null=True, blank=True)
     def __str__(self):
         return str(self.product)
 
