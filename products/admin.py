@@ -317,7 +317,7 @@ class GalleryAdmin(admin.ModelAdmin):
                                 gallery = None
                                 try:
                                     # Intenta obtener la galleria existente
-                                    gallery = Product.objects.get(codigo=row[0])                                    
+                                    gallery = Product.objects.get(codigo=str(row[0]))                                    
                                 except ObjectDoesNotExist:
                                     gallery = None
 
