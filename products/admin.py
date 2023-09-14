@@ -316,7 +316,7 @@ class GalleryAdmin(admin.ModelAdmin):
                             if len(row) >= 3:
                                 try:
                                     # Intenta obtener la galleria existente
-                                    product = Product.objects.get(product=str(row[0]))
+                                    product = Product.objects.get(codigo=str(row[0]))
                                 except ObjectDoesNotExist:
                                     gallery = None
 
