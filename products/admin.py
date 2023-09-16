@@ -160,9 +160,9 @@ class ProductAdmin(admin.ModelAdmin):
                                         if row[2] != ""
                                         else product.description
                                     )
-                                    product.price1 = int(row[3]) if row[3] else product.price1
-                                    product.price2 = int(row[4]) if row[4] else product.price2
-                                    product.price_old = int(row[5]) if row[5] else product.price_old
+                                    product.price1 = int(row[3]) if int(row[3]) != "" else product.price1
+                                    product.price2 = int(row[4]) if int(row[4]) != "" else product.price2
+                                    product.price_old = int(row[5]) if int(row[5]) != "" else product.price_old
                                     product.flag = (
                                         str(row[6]) if row[6] != "" else product.flag
                                     )
@@ -193,7 +193,7 @@ class ProductAdmin(admin.ModelAdmin):
                                         if row[2] != ""
                                         else product.image_alterna
                                     )
-                                    product.qty = int(row[14]) if row[14] != "" else product.qty
+                                    product.qty = int(row[14]) if int(row[14]) != "" else product.qty
                                     product.save()
 
                                 if category != None:
