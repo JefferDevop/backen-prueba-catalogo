@@ -29,25 +29,25 @@ class Product(models.Model):
         format="webp",
     )
     image_alterna = models.CharField(
-        max_length=600, null=True, blank=True, verbose_name=("Imagen Alterna")
+        max_length=600, null=True, default="", blank=True, verbose_name=("Imagen Alterna")
     )
     description = models.TextField(
         max_length=4000, blank=True, verbose_name=("Descripción el producto")
     )
     price1 = models.PositiveIntegerField(
-        blank=True, null=True, verbose_name=("Precio Detal")
+        blank=True, null=True, default=0, verbose_name=("Precio Detal")
     )
     price2 = models.PositiveIntegerField(
-        blank=True, null=True, verbose_name=("Precio por Mayor")
+        blank=True, null=True, default=0, verbose_name=("Precio por Mayor")
     )
     price_old = models.PositiveIntegerField(
-        blank=True, null=True, verbose_name=("Precio Anterior")
+        blank=True, null=True, default=0, verbose_name=("Precio Anterior")
     )
     flag = models.CharField(
-        max_length=200, blank=True, null=True, verbose_name=("Grupo")
+        max_length=200, blank=True, null=True, default="", verbose_name=("Grupo")
     )
     ref = models.CharField(
-        max_length=200, blank=True, null=True, verbose_name=("Referencia")
+        max_length=200, blank=True, null=True, default="", verbose_name=("Referencia")
     )
     qty = models.BigIntegerField(blank=True, null=True, verbose_name=("Cantidad"))
     slug = models.SlugField(max_length=200, unique=True, verbose_name=("Url"))

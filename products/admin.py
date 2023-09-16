@@ -139,7 +139,7 @@ class ProductAdmin(admin.ModelAdmin):
                                         price_old=int(row[5]) if row[5] else None,
                                         flag=str(row[6]) if row[6] else "",
                                         ref=str(row[7]) if row[7] else "",
-                                        slug=str(row[8]).replace(" ", "-"),
+                                        slug=str(row[8]).replace("/[^a-zA-Z0-9 ]/g", "").replace("/ /g", "-")
                                         active=str(row[9]),
                                         soldout=str(row[10]),
                                         offer=str(row[11]),
@@ -160,9 +160,9 @@ class ProductAdmin(admin.ModelAdmin):
                                         if row[2] != ""
                                         else product.description
                                     )
-                                    product.price1 = int(row[3]) if row[3] else None
-                                    product.price2 = int(row[4]) if row[4] else None
-                                    product.price_old = int(row[5]) if row[5] else None
+                                    product.price1 = int(row[3]) if row[3] else product.price1
+                                    product.price2 = int(row[4]) if row[4] else product.price2
+                                    product.price_old = int(row[5]) if row[5] else product.price_old
                                     product.flag = (
                                         str(row[6]) if row[6] != "" else product.flag
                                     )
@@ -170,7 +170,7 @@ class ProductAdmin(admin.ModelAdmin):
                                         str(row[7]) if row[7] != "" else product.ref
                                     )
                                     product.slug = (
-                                        str(row[8]).replace(" ", "-")
+                                        str(row[8]).replace("/[^a-zA-Z0-9 ]/g", "").replace("/ /g", "-")
                                         if row[8] != ""
                                         else product.slug
                                     )
@@ -193,7 +193,7 @@ class ProductAdmin(admin.ModelAdmin):
                                         if row[2] != ""
                                         else product.image_alterna
                                     )
-                                    product.qty = int(row[14]) if row[14] else None
+                                    product.qty = int(row[14]) if row[14] != "" else product.qty
                                     product.save()
 
                                 if category != None:
@@ -259,15 +259,15 @@ class CategoryAdmin(admin.ModelAdmin):
                                     category = Category(
                                         codigo=row[0],
                                         name=row[1],
-                                        slug=row[2].replace(" ", "-"),
+                                        slug=row[2].replace("/[^a-zA-Z0-9 ]/g", "").replace("/ /g", "-"),
                                         image_alterna=row[3],
                                     )
                                     category.save()
                                 else:
                                     # Si la categoría existe, actualiza sus atributos
-                                    category.name = row[1]
-                                    category.slug = row[2].replace(" ", "-")
-                                    category.image_alterna = row[3]
+                                    category.name = row[1] if row[1] != "" else category.name
+                                    category.slug = row[2].replace("/[^a-zA-Z0-9 ]/g", "").replace("/ /g", "-") if row[2] != "" else category.slug
+                                    category.image_alterna = row[3] if row[3] != "" else category.image_alterna
                                     category.save()
                 except Exception as e:
                     # Manejar errores generales aquí, por ejemplo, registrarlos o mostrar un mensaje de error
