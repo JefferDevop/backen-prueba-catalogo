@@ -193,7 +193,7 @@ class ProductAdmin(admin.ModelAdmin):
                                         if row[2] != ""
                                         else product.image_alterna
                                     )
-                                    product.qty = int(row[14]) if row[14] != "" else product.qty
+                                    product.qty = int(row[15]) if row[15] != "" else product.qty
                                     product.save()
 
                                 if category != None:
