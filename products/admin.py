@@ -139,7 +139,7 @@ class ProductAdmin(admin.ModelAdmin):
                                         price_old=int(row[5]) if row[5] else None,
                                         flag=str(row[6]) if row[6] else "",
                                         ref=str(row[7]) if row[7] else "",
-                                        slug=str(row[8]).replace("/[^a-zA-Z0-9 ]/g", "").replace("/ /g", "-")
+                                        slug=str(row[8]).replace("/[^a-zA-Z0-9 ]/g", "").replace("/ /g", "-"),
                                         active=str(row[9]),
                                         soldout=str(row[10]),
                                         offer=str(row[11]),
