@@ -105,7 +105,9 @@ class ProductAdmin(admin.ModelAdmin):
                             if len(row) >= 16:
                                 category_id = row[14]
                                 original_string = str(row[8])
-                                cleaned_string = re.sub(r'[^a-zA-Z0-9]', '', original_string)
+                                cleaned_string = re.sub(
+                                    r"[^a-zA-Z0-9 ]", "", original_string
+                                )
                                 category = None
 
                                 if category_id != "":
@@ -132,8 +134,7 @@ class ProductAdmin(admin.ModelAdmin):
                                     product = None
 
                                 # Si el producto no existe, crea uno nuevo
-                                if product is None:                                    
-
+                                if product is None:
                                     product = Product(
                                         codigo=str(row[0]),
                                         name_extend=str(row[1]),
@@ -143,7 +144,7 @@ class ProductAdmin(admin.ModelAdmin):
                                         price_old=int(row[5]) if row[5] else None,
                                         flag=str(row[6]) if row[6] else "",
                                         ref=str(row[7]) if row[7] else "",
-                                        slug = cleaned_string.replace(' ', '-'),
+                                        slug=cleaned_string.replace(" ", "-"),
                                         active=str(row[9]) if row[9] else True,
                                         soldout=str(row[10]) if row[10] else False,
                                         offer=str(row[11]) if row[11] else False,
@@ -164,9 +165,17 @@ class ProductAdmin(admin.ModelAdmin):
                                         if row[2] != ""
                                         else product.description
                                     )
-                                    product.price1 = int(row[3]) if row[3] != "" else product.price1
-                                    product.price2 = int(row[4]) if row[4] != "" else product.price2
-                                    product.price_old = int(row[5]) if row[5] != "" else product.price_old
+                                    product.price1 = (
+                                        int(row[3]) if row[3] != "" else product.price1
+                                    )
+                                    product.price2 = (
+                                        int(row[4]) if row[4] != "" else product.price2
+                                    )
+                                    product.price_old = (
+                                        int(row[5])
+                                        if row[5] != ""
+                                        else product.price_old
+                                    )
                                     product.flag = (
                                         str(row[6]) if row[6] != "" else product.flag
                                     )
@@ -174,7 +183,7 @@ class ProductAdmin(admin.ModelAdmin):
                                         str(row[7]) if row[7] != "" else product.ref
                                     )
                                     product.slug = (
-                                        cleaned_string.replace(' ', '-')
+                                        cleaned_string.replace(" ", "-")
                                         if row[8] != ""
                                         else product.slug
                                     )
@@ -197,7 +206,9 @@ class ProductAdmin(admin.ModelAdmin):
                                         if row[13] != ""
                                         else product.image_alterna
                                     )
-                                    product.qty = int(row[15]) if row[15] != "" else product.qty
+                                    product.qty = (
+                                        int(row[15]) if row[15] != "" else product.qty
+                                    )
                                     product.save()
 
                                 if category != None:
@@ -263,15 +274,29 @@ class CategoryAdmin(admin.ModelAdmin):
                                     category = Category(
                                         codigo=row[0],
                                         name=row[1],
-                                        slug=row[2].replace("/[^a-zA-Z0-9 ]/g", "").replace("/ /g", "-"),
+                                        slug=row[2]
+                                        .replace("/[^a-zA-Z0-9 ]/g", "")
+                                        .replace("/ /g", "-"),
                                         image_alterna=row[3],
                                     )
                                     category.save()
                                 else:
                                     # Si la categoría existe, actualiza sus atributos
-                                    category.name = row[1] if row[1] != "" else category.name
-                                    category.slug = row[2].replace("/[^a-zA-Z0-9 ]/g", "").replace("/ /g", "-") if row[2] != "" else category.slug
-                                    category.image_alterna = row[3] if row[3] != "" else category.image_alterna
+                                    category.name = (
+                                        row[1] if row[1] != "" else category.name
+                                    )
+                                    category.slug = (
+                                        row[2]
+                                        .replace("/[^a-zA-Z0-9 ]/g", "")
+                                        .replace("/ /g", "-")
+                                        if row[2] != ""
+                                        else category.slug
+                                    )
+                                    category.image_alterna = (
+                                        row[3]
+                                        if row[3] != ""
+                                        else category.image_alterna
+                                    )
                                     category.save()
                 except Exception as e:
                     # Manejar errores generales aquí, por ejemplo, registrarlos o mostrar un mensaje de error
@@ -321,7 +346,7 @@ class GalleryAdmin(admin.ModelAdmin):
                                 gallery = None
                                 try:
                                     # Intenta obtener la galleria existente
-                                    gallery = Product.objects.get(codigo=str(row[0]))                                    
+                                    gallery = Product.objects.get(codigo=str(row[0]))
                                 except ObjectDoesNotExist:
                                     gallery = None
 
