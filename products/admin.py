@@ -263,6 +263,11 @@ class CategoryAdmin(admin.ModelAdmin):
                             row = row.split(";")
 
                             if len(row) >= 4:
+                                original_string = str(row[2])
+                                cleaned_string = re.sub(
+                                    r"[^a-zA-Z0-9 ]", "", original_string
+                                )
+
                                 try:
                                     # Intenta obtener la categoría existente por Código
                                     category = Category.objects.get(codigo=row[0])
@@ -274,9 +279,7 @@ class CategoryAdmin(admin.ModelAdmin):
                                     category = Category(
                                         codigo=row[0],
                                         name=row[1],
-                                        slug=row[2]
-                                        .replace("/[^a-zA-Z0-9 ]/g", "")
-                                        .replace("/ /g", "-"),
+                                        slug=cleaned_string.replace(" ", "-"),
                                         image_alterna=row[3],
                                     )
                                     category.save()
@@ -286,9 +289,7 @@ class CategoryAdmin(admin.ModelAdmin):
                                         row[1] if row[1] != "" else category.name
                                     )
                                     category.slug = (
-                                        row[2]
-                                        .replace("/[^a-zA-Z0-9 ]/g", "")
-                                        .replace("/ /g", "-")
+                                        cleaned_string.replace(" ", "-")
                                         if row[2] != ""
                                         else category.slug
                                     )
