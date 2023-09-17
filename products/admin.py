@@ -145,7 +145,7 @@ class ProductAdmin(admin.ModelAdmin):
                                         offer=str(row[11]),
                                         home=str(row[12]),
                                         image_alterna=str(row[13]) if row[13] else "",
-                                        qty=int(row[14]) if row[14] else None,
+                                        qty=int(row[15]) if row[15] else None,
                                     )
                                     product.save()
                                 else:
@@ -190,7 +190,7 @@ class ProductAdmin(admin.ModelAdmin):
                                     )
                                     product.image_alterna = (
                                         str(row[13])
-                                        if row[2] != ""
+                                        if row[13] != ""
                                         else product.image_alterna
                                     )
                                     product.qty = int(row[15]) if row[15] != "" else product.qty
