@@ -1,4 +1,5 @@
 from django.contrib import admin
+import re
 from django.urls.resolvers import URLPattern
 from django.shortcuts import render
 from django.urls import path
@@ -103,6 +104,8 @@ class ProductAdmin(admin.ModelAdmin):
 
                             if len(row) >= 16:
                                 category_id = row[14]
+                                original_string = str(row[8])
+                                cleaned_string = re.sub(r'[^a-zA-Z0-9]', '', original_string)
                                 category = None
 
                                 if category_id != "":
@@ -129,7 +132,8 @@ class ProductAdmin(admin.ModelAdmin):
                                     product = None
 
                                 # Si el producto no existe, crea uno nuevo
-                                if product is None:
+                                if product is None:                                    
+
                                     product = Product(
                                         codigo=str(row[0]),
                                         name_extend=str(row[1]),
@@ -139,7 +143,7 @@ class ProductAdmin(admin.ModelAdmin):
                                         price_old=int(row[5]) if row[5] else None,
                                         flag=str(row[6]) if row[6] else "",
                                         ref=str(row[7]) if row[7] else "",
-                                        slug=str(row[8]).replace("/[^a-zA-Z0-9 ]/g", "").replace(" ", "-"),
+                                        slug = cleaned_string.replace(' ', '-'),
                                         active=str(row[9]) if row[9] else True,
                                         soldout=str(row[10]) if row[10] else False,
                                         offer=str(row[11]) if row[11] else False,
@@ -170,7 +174,7 @@ class ProductAdmin(admin.ModelAdmin):
                                         str(row[7]) if row[7] != "" else product.ref
                                     )
                                     product.slug = (
-                                        str(row[8]).replace("/[^a-zA-Z0-9 ]/g", "").replace("/ /g", "-")
+                                        cleaned_string.replace(' ', '-')
                                         if row[8] != ""
                                         else product.slug
                                     )
