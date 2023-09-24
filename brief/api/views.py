@@ -1,7 +1,7 @@
 from rest_framework.viewsets import ModelViewSet
 
-from accounts.models import Brief
-from accounts.api.serializers import BriefSerializer
+from brief.models import Brief
+from brief.api.serializers import BriefSerializer
 
 
 class BriefApiViewSet(ModelViewSet):

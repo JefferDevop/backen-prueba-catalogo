@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from accounts.models import Brief
+from brief.models import Brief
 
 
 class BriefSerializer(serializers.ModelSerializer):
