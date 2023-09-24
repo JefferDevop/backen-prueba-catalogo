@@ -48,8 +48,6 @@ TENANT_APPS = (
     'company',
     'csvs',
     'sales',  
-    'brief',
-  
 )
 
 INSTALLED_APPS = list(SHARED_APPS) + \

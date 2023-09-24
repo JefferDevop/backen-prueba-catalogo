@@ -18,7 +18,6 @@ from accounts.api.router import router_user
 from carts.api.router import router_cart
 from stores.api.router import router_order
 from company.api.router import router_company
-from brief.api.router import router_brief
 
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
@@ -60,7 +59,6 @@ urlpatterns = [
     path('api/', include(router_order.urls)),
     path('api/', include(router_warehomedetail.urls)),
     path('api/', include(router_company.urls)),
-    path('api/', include(router_brief.urls)),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
