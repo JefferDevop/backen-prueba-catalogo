@@ -47,6 +47,8 @@ TENANT_APPS = (
     'company',
     'csvs',
     'sales',
+    'push_notifications',
+    'brief',
   
 )
 
@@ -196,6 +198,10 @@ USE_TZ = True
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
+
+PUSH_NOTIFICATIONS_SETTINGS = {
+    "FCM_API_KEY": "BILVdVpjT6zIIBe-Kqbqwhf6pArHZA9ho9dAt_i80RYrwqyFaBS0_h_3a8mbixpK-eMEIioKhD88i7G5CSa-nWI",
+}
 
 cloudinary.config(
     cloud_name="dnio5vufj",
