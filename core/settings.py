@@ -25,6 +25,7 @@ SHARED_APPS = (
 )
 
 TENANT_APPS = (   
+    'push_notifications',
     'django.contrib.contenttypes',
     'django.contrib.auth',
     'django.contrib.sessions',
@@ -46,8 +47,7 @@ TENANT_APPS = (
     'stores',
     'company',
     'csvs',
-    'sales',
-    'push_notifications',
+    'sales',  
     'brief',
   
 )
