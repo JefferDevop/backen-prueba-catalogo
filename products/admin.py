@@ -100,11 +100,11 @@ class ProductAdmin(admin.ModelAdmin):
                             row = row.split(";")
                             # row = row.replace(
                             #     ";", " "
-                            # )  # Replace semicolons with spaces
 
                             if len(row) >= 16:
                                 category_id = row[14]
                                 original_string = str(row[8])
+                                gallery_image = str(row[13]).split(',')
                                 cleaned_string = re.sub(
                                     r"[^a-zA-Z0-9 ]", "", original_string
                                 )
@@ -122,7 +122,7 @@ class ProductAdmin(admin.ModelAdmin):
                                             codigo=category_id,
                                             name=category_id,
                                             slug=category_id,
-                                            image_alterna="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4gk1589Gg7NsjcTVBb-jFRPxRoEOKwY3pUQ&usqp=CAU",
+                                            image_alterna="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Falta_imagen.jpg/640px-Falta_imagen.jpg",
                                         )
                                         category.save()
 
@@ -153,6 +153,11 @@ class ProductAdmin(admin.ModelAdmin):
                                         qty=int(row[15]) if row[15] else None,
                                     )
                                     product.save()
+
+                                    if any(image.strip() for image in gallery_image):
+                                        for image_path in gallery_image:
+                                            gallery = Gallery(product=product, image_alterna=image_path.strip())
+                                            gallery.save()
                                 else:
                                     # Si el producto existe, actualiza sus atributos
                                     product.name_extend = (
@@ -210,6 +215,14 @@ class ProductAdmin(admin.ModelAdmin):
                                         int(row[15]) if row[15] != "" else product.qty
                                     )
                                     product.save()
+
+                                    if any(image.strip() for image in gallery_image):
+
+                                        Gallery.objects.filter(product=product).delete()
+
+                                        for image_path in gallery_image:
+                                            gallery = Gallery(product=product, image_alterna=image_path.strip())
+                                            gallery.save()
 
                                 if category != None:
                                     try:
@@ -317,8 +330,6 @@ class CategoryProductAdmin(admin.ModelAdmin):
 class GalleryAdmin(admin.ModelAdmin):
     list_display = ("id", "image", "image_alterna")
     list_display_links = ("id", "image", "image_alterna")
-    # search_fields = ('codigo', 'flag', 'ref', 'name_extend')
-    # inlines = [GalleryInline]
 
     def get_urls(self):
         urls = super().get_urls()
